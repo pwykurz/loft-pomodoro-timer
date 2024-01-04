@@ -27,7 +27,6 @@ const PomodoroTimer: FC<Props> = (props) => {
   const pomodoroTime = () => {
     if (isBreak && sessionCounter === 4) return Date.now() + longBreakTime
     if(isBreak) return Date.now() + breakMinutes
-
     return Date.now() + workMinutes
   }
 
@@ -51,7 +50,6 @@ const PomodoroTimer: FC<Props> = (props) => {
       start()
       return
     }
-
     isPaused() ? start() : pause()
   }
 

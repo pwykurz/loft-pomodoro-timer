@@ -1,57 +1,75 @@
-'use client';
-import {type FC, useState, useEffect, useRef} from 'react';
-import PlayButton from "@/components/molecules/PlayButton";
-import Countdown, {calcTimeDelta} from "react-countdown";
-import {Simulate} from "react-dom/test-utils";
-import pause = Simulate.pause;
-import {set} from "immutable";
+'use client'
+import {type FC, useRef, useState} from 'react'
+import Countdown, {type CountdownApi} from "react-countdown"
+
+import PlayButton from "@/components/molecules/PlayButton"
+import PomodoroRerender from "@/components/molecules/PomodoroTimer/PomodoroRerender";
 
 const MINUTE = 60 * 1000
 
 export type Props = {
-  initialMinutes: number
+  initialMinutes: number,
   initialBreakTime: number
+  initialLongBreakTime: number
 }
-const PomodoroTimer: FC<Props> = ({initialMinutes, initialBreakTime}) => {
-  const [isActive, setIsActive] = useState(false)
-  const [countdownAPI, setCountdownAPI] = useState(null)
-  const minutes = initialMinutes * MINUTE
 
-  const countdownRef = useRef()
+const PomodoroTimer: FC<Props> = (props) => {
+  const {initialMinutes, initialBreakTime, initialLongBreakTime} = props
+  const [isBreak, setIsBreak] = useState(false)
+  const [sessionCounter, setSessionCounter] = useState(4)
 
-  useEffect(() => {
-    if (countdownRef && countdownRef.current) {
-      setCountdownAPI(countdownRef.current.api)
-    }
-  }, [countdownRef]);
+  const workMinutes = initialMinutes * MINUTE
+  const breakMinutes = initialBreakTime * MINUTE
+  const longBreakTime = initialLongBreakTime * MINUTE
 
-  const onComplete = () => console.log('completed')
+  const countdownRef = useRef<CountdownApi | undefined>()
 
-  const start = () => {
-    setIsActive(() => true)
-    countdownAPI?.start()
+  const pomodoroTime = () => {
+    if (isBreak && sessionCounter === 4) return Date.now() + longBreakTime
+    if(isBreak) return Date.now() + breakMinutes
+
+    return Date.now() + workMinutes
   }
 
-  const pause = () => {
-    setIsActive(() => false)
-    countdownAPI?.pause()
+  const start = () => countdownRef && countdownRef.current?.start()
+  const pause = () => countdownRef && countdownRef.current?.pause()
+  const reset = () => {
+    countdownRef && countdownRef.current?.stop()
+    setSessionCounter(() => 0)
   }
+  const nextSession = () => {
+    setIsBreak(() => false)
+    setSessionCounter(prevState => prevState + 1)
+  }
+  const isStopped = () => countdownRef && countdownRef.current?.isStopped()
+  const isPaused = () => countdownRef && countdownRef.current?.isPaused()
 
-  const restart = () => {
-    countdownAPI?.stop()
-  }
+  const onComplete = () => setIsBreak(prevState => !prevState)
 
   const pomodoroTimerHandler = () => {
-    isActive ? pause() : start()
+    if (isStopped()) {
+      start()
+      return
+    }
+
+    isPaused() ? start() : pause()
   }
 
   return (
     <div className="pomodoro-timer">
       <h1>Work Timer</h1>
-      <Countdown ref={countdownRef} date={Date.now() + minutes} autoStart={false} onComplete={onComplete} />
+      <h2>Session counter: {sessionCounter}</h2>
+      <Countdown
+        ref={countdownRef}
+        autoStart={false}
+        date={pomodoroTime()}
+        onComplete={onComplete}
+        renderer={PomodoroRerender}
+      />
       <div className="timer-buttons">
-        <PlayButton onClick={pomodoroTimerHandler}  state={isActive} />
-        <button onClick={restart}>Reset</button>
+        <PlayButton onClick={pomodoroTimerHandler}/>
+        <button onClick={reset}>reset</button>
+        <button onClick={nextSession}>Next session</button>
       </div>
     </div>
   );

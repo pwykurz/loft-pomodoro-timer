@@ -1,9 +1,11 @@
 'use client'
 import {type FC, useRef, useState} from 'react'
-import Countdown, {type CountdownApi} from "react-countdown"
+
+import Countdown from "react-countdown"
 
 import PlayButton from "@/components/molecules/PlayButton"
-import PomodoroRerender from "@/components/molecules/PomodoroTimer/PomodoroRerender";
+import PomodoroCountdown from "@/components/molecules/PomodoroTimer/PomodoroCountdown"
+import PomodoroRerender from "@/components/molecules/PomodoroTimer/PomodoroRerender"
 
 const MINUTE = 60 * 1000
 
@@ -13,16 +15,15 @@ export type Props = {
   initialLongBreakTime: number
 }
 
-const PomodoroTimer: FC<Props> = (props) => {
-  const {initialMinutes, initialBreakTime, initialLongBreakTime} = props
+const PomodoroTimer: FC<Props> = ({initialMinutes, initialBreakTime, initialLongBreakTime}) => {
   const [isBreak, setIsBreak] = useState(false)
-  const [sessionCounter, setSessionCounter] = useState(4)
+  const [sessionCounter, setSessionCounter] = useState(1)
 
   const workMinutes = initialMinutes * MINUTE
   const breakMinutes = initialBreakTime * MINUTE
   const longBreakTime = initialLongBreakTime * MINUTE
 
-  const countdownRef = useRef<CountdownApi | undefined>()
+  const countdownRef = useRef<Countdown>(null)
 
   const pomodoroTime = () => {
     if (isBreak && sessionCounter === 4) return Date.now() + longBreakTime
@@ -31,21 +32,27 @@ const PomodoroTimer: FC<Props> = (props) => {
   }
 
   const start = () => countdownRef && countdownRef.current?.start()
+
   const pause = () => countdownRef && countdownRef.current?.pause()
-  const reset = () => {
-    countdownRef && countdownRef.current?.stop()
-    setSessionCounter(() => 0)
-  }
-  const nextSession = () => {
-    setIsBreak(() => false)
-    setSessionCounter(prevState => prevState + 1)
-  }
+
   const isStopped = () => countdownRef && countdownRef.current?.isStopped()
+
   const isPaused = () => countdownRef && countdownRef.current?.isPaused()
 
   const onComplete = () => setIsBreak(prevState => !prevState)
 
-  const pomodoroTimerHandler = () => {
+  const onReset = () => {
+    countdownRef && countdownRef.current?.stop()
+    setSessionCounter(() => 0)
+  }
+
+  const onNextSession = () => {
+    pause()
+    setIsBreak(() => false)
+    setSessionCounter(prevState => prevState + 1)
+  }
+
+  const onPomodoroTimer = () => {
     if (isStopped()) {
       start()
       return
@@ -57,20 +64,16 @@ const PomodoroTimer: FC<Props> = (props) => {
     <div className="pomodoro-timer">
       <h1>Work Timer</h1>
       <h2>Session counter: {sessionCounter}</h2>
-      <Countdown
-        ref={countdownRef}
-        autoStart={false}
-        date={pomodoroTime()}
-        onComplete={onComplete}
-        renderer={PomodoroRerender}
-      />
+
+
+      <PomodoroCountdown />
       <div className="timer-buttons">
-        <PlayButton onClick={pomodoroTimerHandler}/>
-        <button onClick={reset}>reset</button>
-        <button onClick={nextSession}>Next session</button>
+        <PlayButton onChange={onPomodoroTimer}/>
+        <button onClick={onReset}>reset</button>
+        <button onClick={onNextSession}>Next session</button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PomodoroTimer;
+export default PomodoroTimer

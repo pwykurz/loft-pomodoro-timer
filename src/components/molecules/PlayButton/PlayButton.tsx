@@ -1,25 +1,29 @@
-'use client';
-import {FC, useState} from "react";
+'use client'
+import {type FC, memo} from "react"
+
+import {useRecoilState} from "recoil"
+
+import pomodoroTimerState from "@/storage/PomodoroTimerState"
 
 import styles from './PlayButton.module.scss'
 
 export type Props = {
-  onClick: () => void
+  onChange: () => void
 }
-const PlayButton:FC<Props> = ({onClick})  => {
-  const [isPlaying, setIsPlaing] = useState(false)
+const PlayButton:FC<Props> = ({onChange})  => {
+  const [isPlaying, setIsPlaying] = useRecoilState(pomodoroTimerState)
 
   const _onClick = () => {
-    setIsPlaing(prevState => !prevState)
-    onClick()
+    setIsPlaying(prevState => !prevState)
+    onChange()
   }
 
   return (
     <div className={styles.playpause}>
-      <input id="playpause" type="checkbox"  name="check" checked={isPlaying} readOnly/>
-      <label htmlFor="playpause" tabIndex={1} onClick={_onClick}/>
+      <input checked={isPlaying} id="playpause"  name="check" readOnly type="checkbox"/>
+      <label htmlFor="playpause" onClick={_onClick} tabIndex={1}/>
     </div>
-  );
+  )
 }
 
-export default PlayButton
+export default memo(PlayButton)

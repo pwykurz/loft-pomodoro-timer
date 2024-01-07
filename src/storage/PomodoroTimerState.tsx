@@ -1,8 +1,23 @@
-import {atom} from "recoil"
+import {atom, RecoilState} from "recoil"
 
-const pomodoroTimerState = atom({
+export type pomodoroTimesStateT = {
+  'initialTime': number,
+  'initialBreakTime': number,
+  'initialLongBreakTime': number
+}
+
+export const pomodoroTimerState = atom({
   key: 'isPlaying',
   default: false
 })
 
-export default pomodoroTimerState
+export const pomodoroTimesState:RecoilState<pomodoroTimesStateT> = atom({
+  key: 'initialTimes',
+  default: {
+    'initialTime': 45,
+    'initialBreakTime': 5,
+    'initialLongBreakTime': 45
+  }
+})
+
+

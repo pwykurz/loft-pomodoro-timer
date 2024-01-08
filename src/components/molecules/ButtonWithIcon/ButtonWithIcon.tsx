@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 export type Props = {
   icon: ReactNode
   children: string | ReactNode,
-  onClick: () => void
+  onClick?: () => void
 }
 const ButtonWithIcon: FC<Props> = ({ icon, children, ...props}) => {
   return (

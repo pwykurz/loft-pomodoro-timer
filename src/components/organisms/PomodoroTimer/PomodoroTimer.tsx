@@ -82,8 +82,6 @@ const PomodoroTimer: FC = () => {
     isPaused() ? start() : pause()
   }
 
-  const openSettings = () => console.log('open modal with settings')
-
   return (
     <div className={styles.pomodoroWrapper}>
       <hgroup>
@@ -103,7 +101,6 @@ const PomodoroTimer: FC = () => {
       <PomodoroActions
         onNextSession={onNextSession}
         onReset={onReset}
-        openSettings={openSettings}
       />
     </div>
   )

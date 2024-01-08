@@ -1,9 +1,11 @@
 import { type FC, type ReactNode } from 'react'
 
+import {ButtonWithIcon} from "@/components/molecules"
+import { Button } from '@/components/ui/button'
 import {
-  Dialog,
+  Dialog, DialogClose,
   DialogContent,
-  DialogDescription,
+  DialogDescription, DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger
@@ -12,12 +14,19 @@ import {
 
 export type Props = {
   title: string | ReactNode,
+  buttonText: string,
+  buttonIcon?: ReactNode,
   children: ReactNode
 }
 
-const SimpleDialog: FC<Props> = ({title, children}) => (
+const SimpleDialog: FC<Props> = ({title, buttonText, buttonIcon, children}) => (
   <Dialog>
-    <DialogTrigger>Open</DialogTrigger>
+    <DialogTrigger>
+      {buttonIcon ?
+        <ButtonWithIcon icon={buttonIcon} >{buttonText}</ButtonWithIcon>
+        :<Button>{buttonText}</Button>
+      }
+    </DialogTrigger>
     <DialogContent>
       <DialogHeader>
         <DialogTitle>{title}</DialogTitle>
@@ -25,6 +34,11 @@ const SimpleDialog: FC<Props> = ({title, children}) => (
           {children}
         </DialogDescription>
       </DialogHeader>
+      <DialogFooter className="sm:justify-start">
+        <DialogClose asChild>
+          <Button type="button">Close</Button>
+        </DialogClose>
+      </DialogFooter>
     </DialogContent>
   </Dialog>
 )

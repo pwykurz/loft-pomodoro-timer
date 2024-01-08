@@ -1,3 +1,4 @@
+'use client'
 import {type FC} from "react"
 
 import {ArrowPathIcon, PlayIcon} from "@heroicons/react/24/solid"

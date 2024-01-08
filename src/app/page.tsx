@@ -1,8 +1,9 @@
 'use client'
-import {Suspense} from "react";
+import {Suspense} from "react"
+
 import {RecoilRoot} from "recoil"
 
-import PomodoroTimer from "@/components/molecules/PomodoroTimer"
+import { PomodoroTimer } from "../components/organisms/PomodoroTimer"
 
 export default function Home() {
   return (

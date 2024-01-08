@@ -1,16 +1,17 @@
 'use client'
 import {type FC, useEffect, useRef, useState} from 'react'
-import {useRecoilState} from "recoil";
 
 import Countdown from "react-countdown"
+import {useRecoilState} from "recoil"
 
-import PlayButton from "@/components/molecules/PlayButton"
-import PomodoroRerender from "@/components/molecules/PomodoroTimer/PomodoroRerender"
-import {pomodoroTimesState, pomodoroTimerState} from "@/storage/PomodoroTimerState";
+import {PlayButton} from "@/components/molecules"
+import {PomodoroActions, PomodoroRerender} from "@/components/organisms/PomodoroTimer/index"
+import {pomodoroTimesState, pomodoroTimerState} from "@/storage/PomodoroTimerState"
 
 import styles from './PomodoroTimer.module.scss'
 
 const MINUTE = 60 * 1000
+const INIT_SESSION_COUNTER = 1
 
 const PomodoroTimer: FC = () => {
   const [initialTimes] = useRecoilState(pomodoroTimesState)
@@ -20,7 +21,7 @@ const PomodoroTimer: FC = () => {
 
   const [date, setDate] = useState(Date.now() + initialTime)
   const [isBreak, setIsBreak] = useState(false)
-  const [sessionCounter, setSessionCounter] = useState(1)
+  const [sessionCounter, setSessionCounter] = useState(INIT_SESSION_COUNTER)
 
 
   const workMinutes = initialTime * MINUTE
@@ -29,15 +30,20 @@ const PomodoroTimer: FC = () => {
 
   const countdownRef = useRef<Countdown | null>(null)
 
+  useEffect(() => pomodoroTime(),[isBreak])
+
   const pomodoroTime = () => {
     if (isBreak && sessionCounter === 4) return setDate( Date.now() + longBreakTime)
     if (isBreak) return setDate(Date.now() + breakMinutes)
     return setDate(Date.now() + workMinutes)
   }
 
-  useEffect(() => pomodoroTime(),[isBreak])
-
   const start = () => countdownRef && countdownRef.current?.start()
+
+  const stop = () => {
+    countdownRef && countdownRef.current?.stop()
+    setIsPlaying(false)
+  }
 
   const pause = () => {
     countdownRef && countdownRef.current?.pause()
@@ -58,13 +64,13 @@ const PomodoroTimer: FC = () => {
 
   const onReset = () => {
     countdownRef && countdownRef.current?.stop()
-    setSessionCounter(() => 0)
+    setSessionCounter(() => INIT_SESSION_COUNTER)
+    setIsPlaying(false)
   }
 
   const onNextSession = () => {
-    pause()
+    stop()
     setIsBreak(() => false)
-    console.log(sessionCounter)
     setSessionCounter(prevState => prevState + 1)
   }
 
@@ -76,25 +82,29 @@ const PomodoroTimer: FC = () => {
     isPaused() ? start() : pause()
   }
 
-  const settingsHandler = () => console.log('open modal with settings')
+  const openSettings = () => console.log('open modal with settings')
 
   return (
     <div className={styles.pomodoroWrapper}>
-      <h1>{isBreak ? 'Break' : 'Focus'}  time</h1>
-      <h2>Session counter: {sessionCounter}</h2>
-      <Countdown
-          autoStart={false}
-          date={date}
-          onComplete={onComplete}
-          ref={countdownRef}
-          renderer={PomodoroRerender}
-      />
-      <div className="timer-buttons">
+      <hgroup>
+        <h1>{isBreak ? 'Break' : 'Focus'} time</h1>
+        <h2>Session counter: {sessionCounter}</h2>
+      </hgroup>
+      <div>
+        <Countdown
+            autoStart={false}
+            date={date}
+            onComplete={onComplete}
+            ref={countdownRef}
+            renderer={PomodoroRerender}
+        />
         <PlayButton onChange={onPomodoroTimer}/>
-        <button onClick={onReset}>Reset</button>
-        <button onClick={onNextSession}>Next session</button>
-        <button onClick={settingsHandler}>Settings</button>
       </div>
+      <PomodoroActions
+        onNextSession={onNextSession}
+        onReset={onReset}
+        openSettings={openSettings}
+      />
     </div>
   )
 }

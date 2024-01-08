@@ -1,5 +1,6 @@
-import type {FC} from "react";
-import {zeroPad} from "react-countdown";
+import {type FC} from "react"
+
+import { zeroPad } from "react-countdown"
 
 export type Props = {
   hours: number,
@@ -9,7 +10,7 @@ export type Props = {
 const PomodoroRerender: FC<Props> = ({hours, minutes, seconds}) => {
   return (
     <div>
-      <span>{zeroPad(hours)}:{zeroPad(minutes)}:{zeroPad(seconds)}</span>
+      {zeroPad(hours)}:{zeroPad(minutes)}:{zeroPad(seconds)}
     </div>
   )
 }

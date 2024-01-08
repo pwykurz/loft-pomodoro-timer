@@ -1,8 +1,10 @@
 .pomodoroWrapper {
-  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
   padding: 20px;
   top: 50%;
   left: 50%;
+  height: 100%;
   position: fixed;
   transform: translate(-50%, -50%);
 }

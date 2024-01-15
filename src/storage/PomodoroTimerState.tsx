@@ -1,7 +1,9 @@
 import {atom, RecoilState} from "recoil"
 
+import {DEFAULT_POMODORO_TIMES} from "@/lib/initialLocalStorage"
+
 export type pomodoroTimesStateT = {
-  'initialTime': number,
+  'initialWorkTime': number,
   'initialBreakTime': number,
   'initialLongBreakTime': number
 }
@@ -14,10 +16,8 @@ export const pomodoroTimerState = atom({
 export const pomodoroTimesState:RecoilState<pomodoroTimesStateT> = atom({
   key: 'initialTimes',
   default: {
-    'initialTime': 45,
-    'initialBreakTime': 5,
-    'initialLongBreakTime': 45
+    'initialWorkTime': DEFAULT_POMODORO_TIMES.workTime,
+    'initialBreakTime': DEFAULT_POMODORO_TIMES.breakTime,
+    'initialLongBreakTime': DEFAULT_POMODORO_TIMES.longBreakTime
   }
 })
-
-

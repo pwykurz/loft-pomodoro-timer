@@ -1,46 +1,49 @@
-import { type FC, type ReactNode } from 'react'
+import {type FC, type ReactNode} from 'react'
+
+import {useRecoilState} from "recoil"
 
 import {ButtonWithIcon} from "@/components/molecules"
 import { Button } from '@/components/ui/button'
 import {
-  Dialog, DialogClose,
+  Dialog,
   DialogContent,
-  DialogDescription, DialogFooter,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger
 } from "@/components/ui/dialog"
+import {dialogState} from "@/storage/DialogState"
+import {pomodoroTimesState} from "@/storage/PomodoroTimerState"
 
 
 export type Props = {
   title: string | ReactNode,
-  buttonText: string,
+  buttonText?: string,
   buttonIcon?: ReactNode,
-  children: ReactNode
+  children: ReactNode,
 }
 
-const SimpleDialog: FC<Props> = ({title, buttonText, buttonIcon, children}) => (
-  <Dialog>
-    <DialogTrigger>
-      {buttonIcon ?
-        <ButtonWithIcon icon={buttonIcon} >{buttonText}</ButtonWithIcon>
-        :<Button>{buttonText}</Button>
-      }
-    </DialogTrigger>
-    <DialogContent>
-      <DialogHeader>
-        <DialogTitle>{title}</DialogTitle>
-        <DialogDescription>
-          {children}
-        </DialogDescription>
-      </DialogHeader>
-      <DialogFooter className="sm:justify-start">
-        <DialogClose asChild>
-          <Button type="button">Close</Button>
-        </DialogClose>
-      </DialogFooter>
-    </DialogContent>
-  </Dialog>
-)
+const SimpleDialog: FC<Props> = ({title, buttonText, buttonIcon, children}) => {
+  const [open, setOpen] = useRecoilState(dialogState)
+
+  return (
+    <Dialog onOpenChange={setOpen} open={open}>
+      <DialogTrigger asChild>
+        {buttonIcon ?
+          <ButtonWithIcon icon={buttonIcon}>{buttonText}</ButtonWithIcon>
+          : <Button>{buttonText}</Button>
+        }
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>{title}</DialogTitle>
+          <DialogDescription>
+            {children}
+          </DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
+  )
+}
 
 export default SimpleDialog

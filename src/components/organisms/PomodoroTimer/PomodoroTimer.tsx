@@ -1,11 +1,12 @@
 'use client'
-import {type FC, useEffect, useRef, useState} from 'react'
+import {type FC, useEffect, useLayoutEffect, useRef, useState} from 'react'
 
 import Countdown from "react-countdown"
 import {useRecoilState} from "recoil"
 
 import {PlayButton} from "@/components/molecules"
 import {PomodoroActions, PomodoroRerender} from "@/components/organisms/PomodoroTimer/index"
+import PomodoroTimeLocalStorage from "@/lib/initialLocalStorage"
 import {pomodoroTimesState, pomodoroTimerState} from "@/storage/PomodoroTimerState"
 
 import styles from './PomodoroTimer.module.scss'
@@ -14,23 +15,32 @@ const MINUTE = 60 * 1000
 const INIT_SESSION_COUNTER = 1
 
 const PomodoroTimer: FC = () => {
-  const [initialTimes] = useRecoilState(pomodoroTimesState)
+  const [initialTimes, setInitialTimes] = useRecoilState(pomodoroTimesState)
   const [, setIsPlaying] = useRecoilState(pomodoroTimerState)
 
-  const {initialTime, initialBreakTime, initialLongBreakTime} = initialTimes
 
-  const [date, setDate] = useState(Date.now() + initialTime)
+  const [date, setDate] = useState(Date.now() + initialTimes.initialWorkTime)
   const [isBreak, setIsBreak] = useState(false)
   const [sessionCounter, setSessionCounter] = useState(INIT_SESSION_COUNTER)
 
-
-  const workMinutes = initialTime * MINUTE
-  const breakMinutes = initialBreakTime * MINUTE
-  const longBreakTime = initialLongBreakTime * MINUTE
+  const workMinutes = initialTimes.initialWorkTime * MINUTE
+  const breakMinutes = initialTimes.initialBreakTime * MINUTE
+  const longBreakTime = initialTimes.initialLongBreakTime * MINUTE
 
   const countdownRef = useRef<Countdown | null>(null)
 
-  useEffect(() => pomodoroTime(),[isBreak])
+  useLayoutEffect(() => {
+    const pomodoroTimeInstance = new PomodoroTimeLocalStorage
+    const pomodoroTimes = pomodoroTimeInstance.setPomodoroTimeFromLocalStorage()
+
+    setInitialTimes({
+        'initialWorkTime': pomodoroTimes.workTime,
+        'initialBreakTime': pomodoroTimes.breakTime,
+        'initialLongBreakTime': pomodoroTimes.longBreakTime
+    })
+  }, [])
+
+  useEffect(() => pomodoroTime(),[isBreak, initialTimes])
 
   const pomodoroTime = () => {
     if (isBreak && sessionCounter === 4) return setDate( Date.now() + longBreakTime)

@@ -5,7 +5,7 @@ import {ArrowPathIcon, PlayIcon} from "@heroicons/react/24/solid"
 
 import {ButtonWithIcon} from "@/components/molecules"
 
-import PomodoroSettingsDialog from "../PomodoroSettingsDialog"
+import PomodoroSettingsDialog from "../PomodoroDialog"
 
 export type Props = {
   onReset: () => void

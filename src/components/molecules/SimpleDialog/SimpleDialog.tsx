@@ -13,7 +13,6 @@ import {
   DialogTrigger
 } from "@/components/ui/dialog"
 import {dialogState} from "@/storage/DialogState"
-import {pomodoroTimesState} from "@/storage/PomodoroTimerState"
 
 
 export type Props = {

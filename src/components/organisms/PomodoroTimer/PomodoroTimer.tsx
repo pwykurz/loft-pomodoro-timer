@@ -1,5 +1,5 @@
 'use client'
-import {type FC, useEffect, useLayoutEffect, useRef, useState} from 'react'
+import {type FC, useEffect, useRef, useState} from 'react'
 
 import Countdown from "react-countdown"
 import {useRecoilState} from "recoil"
@@ -15,34 +15,34 @@ const MINUTE = 60 * 1000
 const INIT_SESSION_COUNTER = 1
 
 const PomodoroTimer: FC = () => {
-  const [initialTimes, setInitialTimes] = useRecoilState(pomodoroTimesState)
+  const [pomodoroTime, setPomodoroTime] = useRecoilState(pomodoroTimesState)
   const [, setIsPlaying] = useRecoilState(pomodoroTimerState)
 
 
-  const [date, setDate] = useState(Date.now() + initialTimes.initialWorkTime)
+  const [date, setDate] = useState(Date.now() + pomodoroTime.workTime)
   const [isBreak, setIsBreak] = useState(false)
   const [sessionCounter, setSessionCounter] = useState(INIT_SESSION_COUNTER)
 
-  const workMinutes = initialTimes.initialWorkTime * MINUTE
-  const breakMinutes = initialTimes.initialBreakTime * MINUTE
-  const longBreakTime = initialTimes.initialLongBreakTime * MINUTE
+  const workMinutes = pomodoroTime.workTime * MINUTE
+  const breakMinutes = pomodoroTime.breakTime * MINUTE
+  const longBreakTime = pomodoroTime.longBreakTime * MINUTE
 
   const countdownRef = useRef<Countdown | null>(null)
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const pomodoroTimeInstance = new PomodoroTimeLocalStorage
     const pomodoroTimes = pomodoroTimeInstance.setPomodoroTimeFromLocalStorage()
 
-    setInitialTimes({
-        'initialWorkTime': pomodoroTimes.workTime,
-        'initialBreakTime': pomodoroTimes.breakTime,
-        'initialLongBreakTime': pomodoroTimes.longBreakTime
+    setPomodoroTime({
+        'workTime': pomodoroTimes.workTime,
+        'breakTime': pomodoroTimes.breakTime,
+        'longBreakTime': pomodoroTimes.longBreakTime
     })
   }, [])
 
-  useEffect(() => pomodoroTime(),[isBreak, initialTimes])
+  useEffect(() => getPomodoroTime(),[isBreak, pomodoroTime])
 
-  const pomodoroTime = () => {
+  const getPomodoroTime = () => {
     if (isBreak && sessionCounter === 4) return setDate( Date.now() + longBreakTime)
     if (isBreak) return setDate(Date.now() + breakMinutes)
     return setDate(Date.now() + workMinutes)

@@ -1,5 +1,7 @@
 'use client'
+
 import {type FC, memo} from "react"
+
 import {useRecoilState} from "recoil"
 
 import { pomodoroTimerState } from "@/storage/PomodoroTimerState"
@@ -24,5 +26,4 @@ const PlayButton:FC<Props> = ({onChange})  => {
     </div>
   )
 }
-
 export default memo(PlayButton)

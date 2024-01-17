@@ -31,6 +31,7 @@ module.exports = {
         "@typescript-eslint",
         "react"
     ],
+    "ignorePatterns": ["*/ui/icons/*"],
     "rules": {
         "semi": ["error", "never"],
         'import/no-extraneous-dependencies': 0,

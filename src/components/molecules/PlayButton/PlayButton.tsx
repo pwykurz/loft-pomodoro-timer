@@ -14,7 +14,7 @@ export type Props = {
 const PlayButton:FC<Props> = ({onChange})  => {
   const [isPlaying, setIsPlaying] = useRecoilState(pomodoroTimerState)
 
-  const _onClick = () => {
+  const onClick = () => {
     setIsPlaying(prevState => !prevState)
     onChange()
   }
@@ -22,7 +22,7 @@ const PlayButton:FC<Props> = ({onChange})  => {
   return (
     <div className={styles.playpause}>
       <input checked={isPlaying} id="playpause"  name="check" readOnly type="checkbox"/>
-      <label htmlFor="playpause" onClick={_onClick} tabIndex={1}/>
+      <label htmlFor="playpause" onClick={onClick} tabIndex={1}/>
     </div>
   )
 }

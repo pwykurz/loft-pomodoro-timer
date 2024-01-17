@@ -7,6 +7,7 @@ import * as z from "zod"
 
 import {Button} from "@/components/ui/button"
 import {Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form"
+import {CoffeeCupIcon, FocusIcon, LunchIcon} from "@/components/ui/icons"
 import {Input} from "@/components/ui/input"
 import PomodoroTimeLocalStorage from "@/lib/initialLocalStorage"
 import {dialogState} from "@/storage/DialogState"
@@ -14,18 +15,15 @@ import {pomodoroTimesState} from "@/storage/PomodoroTimerState"
 
 const formSchema = z.object({
   workTime: z.coerce.number({
-    required_error: "Age is required ",
-    invalid_type_error: "Age must be a number",
-  }).int(),
+    required_error: "Work time is required ",
+  }).int().gte(1),
   breakTime: z.coerce.number({
-    required_error: "Age is required 2",
-    invalid_type_error: "Age must be a number 2",
-  }).int(),
+    required_error: "Break time is required",
+  }).int().gte(1),
   longBreakTime: z.coerce.number({
-    required_error: "Age is required 3",
-    invalid_type_error: "Age must be a number 3",
-  })
-})
+    required_error: "Long break time is required",
+  }).int().gte(1)
+}).required()
 const PomodoroForm = () => {
   const [,setOpen] = useRecoilState(dialogState)
   const [pomodoroTime, setPomodoroTime] = useRecoilState(pomodoroTimesState)
@@ -46,41 +44,38 @@ const PomodoroForm = () => {
   }
 
   return (
-    <Form {...form}>
+    <Form {...form} >
       <form className="py-4 space-y-8" onSubmit={form.handleSubmit(onSubmit)}>
         <FormField control={form.control} name="workTime" render={({field}) => (
           <FormItem>
-            <FormLabel>Work time</FormLabel>
+            <FormLabel className="flex items-center gap-2"><FocusIcon width={25} /> Work time</FormLabel>
             <FormControl>
               <Input placeholder="add work time" type="number" {...field} />
             </FormControl>
-            <FormDescription>
-              This is your public display name.
-            </FormDescription>
+            <FormDescription>This is the time when you will be as focused as possible.</FormDescription>
             <FormMessage />
           </FormItem>
         )} />
         <FormField control={form.control} name="breakTime" render={({field}) => (
           <FormItem>
-            <FormLabel>Break time</FormLabel>
+            <FormLabel className="flex items-end gap-2"><CoffeeCupIcon width={25} /> Break time</FormLabel>
             <FormControl>
               <Input placeholder="add work time" type="number" {...field} />
             </FormControl>
             <FormDescription>
-              This is your public display name.
+              This is the time for a break. Step away from the computer.
+              <br />REALLY GO AWAY!
             </FormDescription>
             <FormMessage />
           </FormItem>
         )} />
         <FormField control={form.control} name="longBreakTime" render={({field}) => (
           <FormItem>
-            <FormLabel>Break time</FormLabel>
+            <FormLabel className="flex items-center gap-2"><LunchIcon width={25} /> Long break time</FormLabel>
             <FormControl>
               <Input placeholder="add work time" type="number" {...field} />
             </FormControl>
-            <FormDescription>
-              This is your public display name.
-            </FormDescription>
+            <FormDescription>This is a long break for lunch, for example.</FormDescription>
             <FormMessage />
           </FormItem>
         )} />

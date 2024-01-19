@@ -1,0 +1,52 @@
+.ytPlayerWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+}
+
+.ytPlayerIframe {
+  width: 100dvw;
+  height: 100dvh;
+
+  .ytp-button {
+    display: none !important;
+  }
+}
+
+.ytPlayerList {
+  background: rgba(102, 102, 102, .7);
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  overflow: auto;
+  overflow-x: hidden;
+  max-width: 50vw;
+  width: 100%;
+  box-shadow: 0 0 10px #999;
+}
+
+.item {
+  cursor: pointer;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-bottom: 1px solid #999;
+
+  &:hover {
+    background: rgba(102, 102, 102, .7);
+  }
+}
+
+.title {
+  color: #dfdfdf;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 300px;
+  overflow: hidden;
+  font-weight: 400;
+}

@@ -1,4 +1,8 @@
 :root {
+    --background: rgb(177,1,66);
+    --background-gradient: linear-gradient(45deg, rgba(177,1,66,0.8) 0%, rgba(47,1,56,0.8) 100%);
+    --background-gradient-reverse: linear-gradient(45deg, rgba(47,1,56,0.9)  0%, rgba(177,1,66,0.9) 100%);
+
     --link-color: #ffa677;
     --link-color-hover: #ff8d51;
 
@@ -8,6 +12,8 @@
 
     --text-primary: #dfdfdf;
 
-    --button-background: rgb(131, 96,83);
-    --button-color: #ffa677;
+    --button-background: var(--background-gradient-reverse);
+    --button-color: var(--text-primary);
+
+    --transition-default: all .2s linear;
 }

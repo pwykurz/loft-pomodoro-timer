@@ -3,7 +3,7 @@ import {useEffect, useMemo, useRef, type FC} from "react"
 
 import ReactPlayer from "react-player"
 import { type BaseReactPlayerProps } from 'react-player/base'
-import {useRecoilState, useRecoilValue} from "recoil"
+import {useRecoilState} from "recoil"
 
 import YTPlayerList from "@/components/organisms/YTPlayer/YTPlayerList"
 import {pomodoroTimerState} from "@/storage/PomodoroTimerState"
@@ -12,7 +12,7 @@ import currentVideoState from "@/storage/YouTubeState"
 import styles from './YTPlayer.module.scss'
 
 const YTPlayer:FC = () => {
-  const isPlaying = useRecoilValue(pomodoroTimerState)
+  const isPlaying = useRecoilState(pomodoroTimerState)
   const currentVideo = useRecoilState(currentVideoState)
   const playerRef = useRef<BaseReactPlayerProps>()
 
@@ -27,19 +27,19 @@ const YTPlayer:FC = () => {
   return (
     <>
       <YTPlayerList />
-     <div className={styles.ytPlayerWrapper}>
+      <div className={styles.ytPlayerWrapper}>
        <ReactPlayer
          controls={false}
          height="100%"
          muted
+         playing
+         // @ts-expect-error lint error
+         ref={playerRef}
          url={ytUrl}
          volume={1}
          width="100%"
-         playing
-         // @ts-expect-error ref is ok. Lint overreact.
-         ref={playerRef}
        />
-     </div>
+      </div>
     </>
    )
 }

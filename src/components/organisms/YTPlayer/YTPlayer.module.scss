@@ -19,7 +19,7 @@
 }
 
 .ytPlayerList {
-  background: var(--box-background);
+  background: var(--background-gradient-90deg);
   position: fixed;
   right: calc(-90vw + 10px);
   top: 0;
@@ -48,9 +48,14 @@
   writing-mode: vertical-rl;
   white-space: nowrap;
   display: inline-block;
-  background: var(--box-background);
+  background: var(--background-gradient-reverse);
   box-shadow: 4px 0 10px var(--box-shadow-color);
   z-index: -2;
+  transition: var(--transition-default);
+
+  &:hover {
+    box-shadow: 4px 0 30px var(--box-shadow-color);
+  }
 }
 
 .item {
@@ -63,7 +68,7 @@
   transition: var(--transition-default);
 
   &:hover {
-    background: var(--box-background-hover);
+    background: var(--background-gradient-90deg);
   }
 }
 
@@ -77,9 +82,6 @@
   height: 100vh;
   overflow: auto;
   overflow-x: hidden;
-}
-
-.titleGroup {
 }
 
 .title {
@@ -105,7 +107,6 @@
 .subtitle {
   @extend .title;
   font-size: 14px;
-  font-weight: 100;
   margin: 5px 0;
 }
 
@@ -113,7 +114,6 @@
   display: inline-block;
   vertical-align: middle;
   font-size: 14px;
-  font-weight: 100;
   color: var(--link-color);
   transition: var(--transition-default);
 

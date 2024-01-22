@@ -4,6 +4,7 @@ import {type FC, memo} from "react"
 
 import {useRecoilState} from "recoil"
 
+import {cn} from "@/lib/utils"
 import { pomodoroTimerState } from "@/storage/PomodoroTimerState"
 
 import styles from './PlayButton.module.scss'
@@ -20,7 +21,7 @@ const PlayButton:FC<Props> = ({onChange})  => {
   }
 
   return (
-    <div className={styles.playpause}>
+    <div className={cn(styles.playpause, 'my-4')}>
       <input checked={isPlaying} id="playpause"  name="check" readOnly type="checkbox"/>
       <label htmlFor="playpause" onClick={onClick} tabIndex={1}/>
     </div>

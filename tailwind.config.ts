@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
+  mode: 'jit',
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -8,6 +9,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        'button-primary': 'rgb(131, 96, 83)',
+        'button-color-primary': '#ffa677',
+        'secondary': '#ff0000'
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':

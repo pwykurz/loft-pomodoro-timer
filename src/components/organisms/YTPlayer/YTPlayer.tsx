@@ -17,9 +17,7 @@ const YTPlayer:FC = () => {
   const playerRef = useRef<BaseReactPlayerProps>()
 
   useEffect(() => {
-    console.log(playerRef.current)
     const ytPlayer = playerRef.current?.player?.player
-
     ytPlayer &&
     isPlaying ? ytPlayer?.unmute() : ytPlayer?.mute()
   }, [isPlaying])

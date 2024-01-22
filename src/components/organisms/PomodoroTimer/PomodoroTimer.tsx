@@ -96,7 +96,7 @@ const PomodoroTimer: FC = () => {
     <div className={styles.pomodoroWrapper}>
       <hgroup>
         <h1>{isBreak ? 'Break' : 'Focus'} time</h1>
-        <h2>Session counter: {sessionCounter}</h2>
+        <h2>Session: {sessionCounter}</h2>
       </hgroup>
       <div>
         <Countdown

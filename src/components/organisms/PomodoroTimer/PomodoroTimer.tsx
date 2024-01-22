@@ -14,6 +14,8 @@ import styles from './PomodoroTimer.module.scss'
 const MINUTE = 60 * 1000
 const INIT_SESSION_COUNTER = 1
 
+// TODO: comit test
+
 const PomodoroTimer: FC = () => {
   const [pomodoroTime, setPomodoroTime] = useRecoilState(pomodoroTimesState)
   const [, setIsPlaying] = useRecoilState(pomodoroTimerState)

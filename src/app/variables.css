@@ -2,12 +2,13 @@
     --background: rgb(177,1,66);
     --background-gradient: linear-gradient(45deg, rgba(177,1,66,0.8) 0%, rgba(47,1,56,0.8) 100%);
     --background-gradient-reverse: linear-gradient(45deg, rgba(47,1,56,0.9)  0%, rgba(177,1,66,0.9) 100%);
+    --background-gradient-90deg: linear-gradient(-90deg, rgba(177,1,66,0.8) 0%, rgba(47,1,56,0.8) 50%);
 
-    --link-color: #ffa677;
-    --link-color-hover: #ff8d51;
+    --link-color: #b10142;
+    --link-color-hover: #2f0138;
 
     --box-background: rgba(131, 96, 83, .9);
-    --box-background-hover: rgba(131, 96, 83, .7);
+    --box-background-hover: var(--background-gradient);
     --box-shadow-color: #999;
 
     --text-primary: #dfdfdf;

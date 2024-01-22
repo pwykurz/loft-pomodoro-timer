@@ -13,7 +13,7 @@
   transform: translate(-50%, -50%);
   box-shadow: 0 0 30px var(--box-shadow-color);
   background: rgb(177,1,66);
-  background: linear-gradient(45deg, rgba(177,1,66,0.8) 0%, rgba(47,1,56,0.8) 100%);
+  background: var(--background-gradient);
 }
 
 .pomodoroButtons {

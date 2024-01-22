@@ -1,5 +1,4 @@
 'use client'
-
 import {useEffect, useState, type FC} from "react"
 
 import {ArrowTopRightOnSquareIcon} from "@heroicons/react/20/solid"

@@ -1,0 +1,13 @@
+:root {
+    --link-color: #ffa677;
+    --link-color-hover: #ff8d51;
+
+    --box-background: rgba(131, 96, 83, .9);
+    --box-background-hover: rgba(131, 96, 83, .7);
+    --box-shadow-color: #999;
+
+    --text-primary: #dfdfdf;
+
+    --button-background: rgb(131, 96,83);
+    --button-color: #ffa677;
+}

@@ -1,0 +1,59 @@
+export type VideoListT = {
+  title: string,
+  key: string,
+  thumbnailUrl: string,
+  channelName: string,
+  channelYTName: string,
+}
+
+export const VIDEO_LIST: VideoListT[] = [
+  {
+    title: 'Sub Zero: Dark Sci Fi Music For Winter Relaxation (Deep And Relaxing)',
+    key: 'n--SX54AUZU',
+    thumbnailUrl: 'https://i.ytimg.com/vi/n--SX54AUZU/maxresdefault.jpg',
+    channelName: 'Futurescapes - Sci Fi Ambience',
+    channelYTName: '@Futurescapes-SciFiAmbience',
+  },
+  {
+    title: 'Monolith: Relaxing Ambient Sci Fi Music For Winter',
+    key: '3Iilv1NlWNU',
+    thumbnailUrl: 'https://i.ytimg.com/vi/3Iilv1NlWNU/maxresdefault.jpg',
+    channelName: 'Futurescapes - Sci Fi Ambience',
+    channelYTName: '@Futurescapes-SciFiAmbience',
+  },
+  {
+    title: 'The Sigma District: Dark Ambient Sci Fi Music (A Noir Cyberpunk Journey)',
+    key: 'mcPLbW-_kfw',
+    thumbnailUrl: 'https://i.ytimg.com/vi/mcPLbW-_kfw/maxresdefault.jpg',
+    channelName: 'Futurescapes - Sci Fi Ambience',
+    channelYTName: '@Futurescapes-SciFiAmbience',
+  },
+  {
+    title: 'Japanese Flute to Serenity on a Rainy Day - Japanese Zen Music For Soothing, Meditation, Healing',
+    key: '6jKDMA6rLpY',
+    thumbnailUrl: 'https://i.ytimg.com/vi/6jKDMA6rLpY/maxresdefault.jpg',
+    channelName: 'Ambient With Flute',
+    channelYTName: '@AmbientWithFlute',
+  },
+  {
+    title: 'Peaceful Morning in the Cherry Blossom Garden - Japanese Flute Music For Meditation, Healing',
+    key: 'Oty2OYQJZtw',
+    thumbnailUrl: 'https://i.ytimg.com/vi/Oty2OYQJZtw/maxresdefault.jpg',
+    channelName: 'Ambient With Flute',
+    channelYTName: '@AmbientWithFlute',
+  },
+  {
+    title: 'Night city lofi 🎶 Rainy Lofi Hip Hop Mix [hip hop beats to study/relax to]',
+    key: 'K7MWD_Ial24',
+    thumbnailUrl: 'https://i.ytimg.com/vi/K7MWD_Ial24/maxresdefault.jpg',
+    channelName: 'Chill Cities Vibes',
+    channelYTName: '@chillcitiesvibes',
+  },
+  {
+    title: 'Raining In 1980s City 💧 Rainy Lofi Hip Hop [ Chill Lofi Beats & Rain Sounds ]\n',
+    key: 'oz9S2JUzT6A',
+    thumbnailUrl: 'https://i.ytimg.com/vi/oz9S2JUzT6A/maxresdefault.jpg',
+    channelName: 'Chill Cities Vibes',
+    channelYTName: '@chillcitiesvibes',
+  }
+]

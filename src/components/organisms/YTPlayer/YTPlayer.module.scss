@@ -1,3 +1,5 @@
+@import "src/app/mediaQueries.module.scss";
+
 .ytPlayerWrapper {
   position: absolute;
   top: 0;
@@ -17,36 +19,112 @@
 }
 
 .ytPlayerList {
-  background: rgba(102, 102, 102, .7);
+  background: var(--box-background);
   position: fixed;
-  right: 0;
+  right: calc(-90vw + 10px);
   top: 0;
-  height: 100vh;
-  overflow: auto;
-  overflow-x: hidden;
-  max-width: 50vw;
+  max-width: calc(90vw - 10px);
   width: 100%;
-  box-shadow: 0 0 10px #999;
+  box-shadow: 0 0 10px var(--box-shadow-color);
+  transition: right .2s linear;
+
+  @include gt-sm {
+    right: -50vw;
+    width: 50vw;
+  }
+}
+
+.ytPlayerListShow {
+  right: 0;
+}
+
+.tab {
+  cursor: pointer;
+  padding: 20px 10px;
+  position: absolute;
+  left: -44px;
+  top: 50%;
+  transform: translateY(-50%) rotate(180deg);
+  writing-mode: vertical-rl;
+  white-space: nowrap;
+  display: inline-block;
+  background: var(--box-background);
+  box-shadow: 4px 0 10px var(--box-shadow-color);
+  z-index: -2;
 }
 
 .item {
   cursor: pointer;
   padding: 20px;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   gap: 10px;
-  border-bottom: 1px solid #999;
+  border-bottom: 1px solid var(--box-shadow-color);
 
   &:hover {
-    background: rgba(102, 102, 102, .7);
+    background: var(--box-background-hover);
+    transition: background .2s linear;
   }
 }
 
+.listTitle {
+  padding: 10px 20px;
+  border-bottom: 1px solid;
+  font-weight: 100;
+}
+
+.ytList {
+  height: 100vh;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.titleGroup {
+}
+
 .title {
-  color: #dfdfdf;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width: 300px;
+  max-width: 45vw;
   overflow: hidden;
+  font-size: 16px;
   font-weight: 400;
+
+
+  @include gt-xs {
+    right: calc(-40vw + 10px);
+    max-width: 65vw;
+  }
+
+  @include gt-sm {
+    right: calc(-40vw + 10px);
+    max-width: 35vw;
+  }
+}
+
+.subtitle {
+  @extend .title;
+  font-size: 14px;
+  font-weight: 100;
+  margin: 5px 0;
+}
+
+.link {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 14px;
+  font-weight: 100;
+  color: var(--link-color);
+  transition: color .2s linear;
+
+  &:hover {
+    color: var(--link-color-hover);
+  }
+
+  svg {
+    display: inline-block;
+    vertical-align: text-top;
+    margin-left: 5px;
+    width: 15px;
+  }
 }

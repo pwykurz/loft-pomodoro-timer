@@ -26,7 +26,7 @@
   max-width: calc(90vw - 10px);
   width: 100%;
   box-shadow: 0 0 10px var(--box-shadow-color);
-  transition: right .2s linear;
+  transition: var(--transition-default);
 
   @include gt-sm {
     right: -50vw;
@@ -60,10 +60,10 @@
   align-items: center;
   gap: 10px;
   border-bottom: 1px solid var(--box-shadow-color);
+  transition: var(--transition-default);
 
   &:hover {
     background: var(--box-background-hover);
-    transition: background .2s linear;
   }
 }
 
@@ -115,7 +115,7 @@
   font-size: 14px;
   font-weight: 100;
   color: var(--link-color);
-  transition: color .2s linear;
+  transition: var(--transition-default);
 
   &:hover {
     color: var(--link-color-hover);

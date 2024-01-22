@@ -7,12 +7,10 @@ export type Props = {
   minutes: number,
   seconds: number
 }
-const PomodoroRerender: FC<Props> = ({hours, minutes, seconds}) => {
-  return (
-    <div>
-      {zeroPad(hours)}:{zeroPad(minutes)}:{zeroPad(seconds)}
+const PomodoroRerender: FC<Props> = ({hours, minutes, seconds}) => (
+    <div className="text-center text-4xl">
+      {hours==='0' && `${zeroPad(hours)}:`}{zeroPad(minutes)}:{zeroPad(seconds)}
     </div>
   )
-}
 
 export default PomodoroRerender

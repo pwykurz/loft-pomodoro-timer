@@ -1,18 +1,19 @@
 .playpause {
   padding: 20px;
   outline: none;
-  border: 1px solid var(--button-color);
-  border-radius: 5px;
-  box-shadow: 0 0 20px var(--box-shadow-color);
-  transition: all .2s linear;
+  border-radius: 50%;
+  background: red;
+  width: 110px;
+  height: 110px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--background);
+  background: var(--button-background);
+  transition: var(--transition-default);
 
   &:hover {
-    background: var(--button-color);
-    border-color: var(--box-background);
-
-    label {
-      border-color: transparent transparent transparent var(--box-background);
-    }
+    box-shadow: 0 0 30px var(--box-shadow-color);
   }
 
   &:active {
@@ -26,12 +27,14 @@
     width: 0;
     height: 74px;
     outline: none;
+    left: 5px;
+    position: relative;
 
-    border-color: transparent transparent transparent var(--button-color);
-    transition: 100ms all ease;
+    border-color: transparent transparent transparent var(--text-primary);
     cursor: pointer;
     border-style: solid;
     border-width: 37px 0 37px 60px;
+    transition: var(--transition-default);
   }
   input[type="checkbox"] {
     position: absolute;

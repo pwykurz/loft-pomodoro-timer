@@ -1,6 +1,7 @@
 'use client'
 import {useEffect, useMemo, useRef, type FC} from "react"
 
+import dynamic from "next/dynamic"
 import ReactPlayer from "react-player"
 import { type BaseReactPlayerProps } from 'react-player/base'
 import { useRecoilValue} from "recoil"
@@ -11,15 +12,17 @@ import currentVideoState from "@/storage/YouTubeState"
 
 import styles from './YTPlayer.module.scss'
 
+const VideoPlayer = dynamic(() => import("@/components/molecules/VideoPlayer"), { ssr: false })
+
 const YTPlayer:FC = () => {
   const isPlaying = useRecoilValue(pomodoroTimerState)
   const currentVideo = useRecoilValue(currentVideoState)
-  const playerRef = useRef<BaseReactPlayerProps>()
+  const playerRef = useRef<BaseReactPlayerProps & ReactPlayer>(null)
 
   useEffect(() => {
     const ytPlayer = playerRef.current?.player?.player
     if (ytPlayer) {
-      if(isPlaying){
+      if(isPlaying) {
         ytPlayer.unmute()
         ytPlayer.volume = 1
       } else {
@@ -35,17 +38,7 @@ const YTPlayer:FC = () => {
     <>
       <YTPlayerList />
       <div className={styles.ytPlayerWrapper}>
-       <ReactPlayer
-         controls={false}
-         height="100%"
-         muted
-         playing
-         // @ts-expect-error lint error
-         ref={playerRef}
-         url={ytUrl}
-         volume={0}
-         width="100%"
-       />
+        <VideoPlayer playerRef={playerRef} ytUrl={ytUrl} />
       </div>
     </>
    )

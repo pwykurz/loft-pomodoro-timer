@@ -1,5 +1,4 @@
 'use client'
-
 import {type FC, memo} from "react"
 
 import {useRecoilState} from "recoil"

@@ -13,7 +13,7 @@
   transition: var(--transition-default);
 
   &:hover {
-    box-shadow: 0 0 30px var(--box-shadow-color);
+    box-shadow: var(--box-shadow-hover)
   }
 
   &:active {

@@ -41,21 +41,21 @@ const YTPlayerList:FC = () => {
           return (
           <li className={styles.item} key={key} onClick={() => {
             setCurrentVideo(music.key)}}>
-            <div>
+            <span>
               <Image
                 alt={music.title}
                 height={54}
                 src={music.thumbnailUrl}
                 width={96}
               />
-            </div>
-            <div className={styles.titleGroup}>
+            </span>
+            <span className={styles.titleGroup}>
               <h3 className={styles.title}>{music.title}</h3>
               <h4 className={styles.subtitle}>Channel name: {music.channelName}</h4>
               <a className={styles.link} href={`https://www.youtube.com/watch?v=${music.key}`} target="_blank">
                 Go to youtube <ArrowTopRightOnSquareIcon/>
               </a>
-            </div>
+            </span>
           </li>
           )
         })}

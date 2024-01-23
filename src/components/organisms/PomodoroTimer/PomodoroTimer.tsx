@@ -7,6 +7,7 @@ import {useRecoilState} from "recoil"
 import {PlayButton} from "@/components/molecules"
 import {PomodoroActions, PomodoroRerender} from "@/components/organisms/PomodoroTimer/index"
 import PomodoroTimeLocalStorage from "@/lib/initialLocalStorage"
+import {cn} from "@/lib/utils"
 import {pomodoroTimesState, pomodoroTimerState} from "@/storage/PomodoroTimerState"
 
 import styles from './PomodoroTimer.module.scss'
@@ -93,7 +94,7 @@ const PomodoroTimer: FC = () => {
   }
 
   return (
-    <div className={styles.pomodoroWrapper}>
+    <div className={cn(styles.pomodoroWrapper)}>
       <hgroup>
         <h1>{isBreak ? 'Break' : 'Focus'} time</h1>
         <h2>Session: {sessionCounter}</h2>

@@ -55,5 +55,12 @@ export const VIDEO_LIST: VideoListT[] = [
     thumbnailUrl: 'https://i.ytimg.com/vi/oz9S2JUzT6A/maxresdefault.jpg',
     channelName: 'Chill Cities Vibes',
     channelYTName: '@chillcitiesvibes',
+  },
+  {
+    title: 'Sleeping Soul | lofi hip hop | relaxing beats',
+    key: 'Dj-Qc6sbmnM',
+    thumbnailUrl: 'https://i.ytimg.com/vi/Dj-Qc6sbmnM/maxresdefault.jpg',
+    channelName: 'Great Stuff',
+    channelYTName: '@great-stuff-6688',
   }
 ]

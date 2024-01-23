@@ -1,5 +1,5 @@
 'use client'
-import {useEffect, useState, type FC} from "react"
+import {useEffect, useState, type FC, useRef} from "react"
 
 import {ArrowTopRightOnSquareIcon} from "@heroicons/react/20/solid"
 import Image from 'next/image'
@@ -7,6 +7,7 @@ import {type BaseReactPlayerProps} from "react-player/base"
 import {useRecoilState} from "recoil"
 
 import YouTubeAPI from "@/api/ytPlayer/ytPlayer"
+import useClickOutside from "@/hooks/useClickOutside"
 import {cn} from "@/lib/utils"
 import currentVideoState from "@/storage/YouTubeState"
 
@@ -17,6 +18,13 @@ const YTPlayerList:FC = () => {
   const [open, setOpen] = useState(false)
   const [musicList, setMusicList] = useState<BaseReactPlayerProps>([])
   const [,setCurrentVideo] = useRecoilState(currentVideoState)
+  const listRef = useRef(null)
+
+  const isClickedOutside = useClickOutside(listRef)
+
+  useEffect(() => {
+    isClickedOutside && setOpen(false)
+  }, [isClickedOutside])
 
   const fetchChannels = () => YouTubeAPI.getStaticVideoList()
 
@@ -25,7 +33,7 @@ const YTPlayerList:FC = () => {
   const openHandler = () => setOpen(prevState => !prevState)
 
   return (
-    <div className={cn(styles.ytPlayerList, {[styles.ytPlayerListShow]: open})}>
+    <div className={cn(styles.ytPlayerList, {[styles.ytPlayerListShow]: open})} ref={listRef}>
       <div className={styles.tab} onClick={openHandler}>Choose music</div>
       <ul className={styles.ytList}>
         {musicList && musicList.length > 0 &&

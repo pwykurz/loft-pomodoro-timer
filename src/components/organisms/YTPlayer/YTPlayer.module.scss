@@ -19,7 +19,7 @@
 }
 
 .ytPlayerList {
-  background: var(--background-gradient-90deg);
+  background: var(--background-gradient-90deg-secondary);
   position: fixed;
   right: calc(-90vw + 10px);
   top: 0;
@@ -68,7 +68,7 @@
   transition: var(--transition-default);
 
   &:hover {
-    background: var(--background-gradient-90deg);
+    background: var(--background-gradient-90deg-secondary);
   }
 }
 

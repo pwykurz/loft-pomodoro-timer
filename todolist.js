@@ -5,4 +5,5 @@
     4. Cookie bar
     5. Ostylowanie strony
     6. pomodoro loader
+    7. PWA
  */

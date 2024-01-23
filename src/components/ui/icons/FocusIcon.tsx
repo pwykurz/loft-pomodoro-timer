@@ -7,7 +7,7 @@ export type Props = {
   fill?: string
 }
 
-const FocusIcon:FC<Props> = ({fill="#000000", width=20}) => (
+const FocusIcon:FC<Props> = ({fill="#dfdfdf", width=20}) => (
   <svg xmlns="http://www.w3.org/2000/svg" fill={fill} width={width} version="1.1" viewBox="0 0 492.062 492.062">
 <g>
 	<path

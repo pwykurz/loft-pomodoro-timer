@@ -6,7 +6,7 @@ export type Props = {
   width?: number;
 	fill?: string
 }
-const LunchIcon:FC<Props> = ({fill= "#676767", width=20}) => (
+const LunchIcon:FC<Props> = ({fill= "#9b9b9b", width=20}) => (
   <svg xmlns="http://www.w3.org/2000/svg" fill={fill}
        width={width} version="1.1" viewBox="0 0 511.999 511.999">
 <g>

@@ -1,3 +1,4 @@
+'use client'
 import {type FC} from "react"
 
 import { zeroPad } from "react-countdown"

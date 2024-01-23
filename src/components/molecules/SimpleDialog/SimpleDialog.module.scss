@@ -1,0 +1,16 @@
+.dialogWrapper {
+  background: var(--background-gradient);
+  color: var(--text-primary);
+}
+
+.title {
+  color: var(--text-primary);
+}
+
+.description {
+  @extend .title;
+}
+
+.button {
+  color: var(--text-primary);
+}

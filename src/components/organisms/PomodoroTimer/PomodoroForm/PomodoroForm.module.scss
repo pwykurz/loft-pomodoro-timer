@@ -1,6 +1,9 @@
-.primary {
+.description {
+  color: var(--text-primary);
+}
+
+.button {
   background: var(--button-background);
-  color: var(--button-color);
   transition: var(--transition-default);
 
   &:hover {

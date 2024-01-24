@@ -19,6 +19,7 @@ const VideoPlayer: FC<Props> = ({
       height="100%"
       muted
       {...playerProps}
+      loop
       playing
       ref={playerRef}
       url={ytUrl}

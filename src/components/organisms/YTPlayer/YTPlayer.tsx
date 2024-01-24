@@ -22,6 +22,8 @@ const YTPlayer:FC = () => {
     isPlaying ? ytPlayer?.unmute() : ytPlayer?.mute()
   }, [isPlaying])
 
+  // TODO: test
+
   const ytUrl = useMemo(() => `https://www.youtube.com/watch?v=${currentVideo}`, [currentVideo])
 
   return (

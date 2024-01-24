@@ -62,5 +62,12 @@ export const VIDEO_LIST: VideoListT[] = [
     thumbnailUrl: 'https://i.ytimg.com/vi/Dj-Qc6sbmnM/maxresdefault.jpg',
     channelName: 'Great Stuff',
     channelYTName: '@great-stuff-6688',
+  },
+  {
+    title: 'black forest.\n',
+    key: 's-tLD-srUX0',
+    thumbnailUrl: 'https://i.ytimg.com/vi/s-tLD-srUX0/maxresdefault.jpg',
+    channelName: 'Loneliness',
+    channelYTName: '@Loneliness1.',
   }
 ]

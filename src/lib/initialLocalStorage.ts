@@ -1,37 +1,31 @@
-export const DEFAULT_POMODORO_TIMES = {
-  'workTime': 25,
-  'breakTime': 5,
-  'longBreakTime': 15
-}
+import {pomodoroTimesStateT} from "@/storage/PomodoroTimerState"
 
-export type DefaultPomodoroTimesType = {
-  longBreakTime: number;
-  breakTime: number;
-  workTime: number;
+export const DEFAULT_POMODORO_TIMES = {
+  workTime: 25,
+  breakTime: 5,
+  longBreakTime: 15,
+  isBreak: false,
+  breakAutostart: false,
 }
 
 class PomodoroTimeLocalStorage {
-  public setPomodoroTimeToLocalStorage = ({longBreakTime, breakTime, workTime}: DefaultPomodoroTimesType) => {
+  public setPomodoroTimeToLocalStorage = ({longBreakTime, breakTime, workTime, isBreak, breakAutostart}: pomodoroTimesStateT) => {
     return localStorage.setItem('pomodoroTime', JSON.stringify({
-      'workTime': workTime,
-      'breakTime': breakTime,
-      'longBreakTime': longBreakTime,
+      workTime: workTime,
+      breakTime: breakTime,
+      longBreakTime: longBreakTime,
+      isBreak: isBreak,
+      breakAutostart: breakAutostart
     }))
   }
-  public setPomodoroTimeFromLocalStorage = (): DefaultPomodoroTimesType => {
+  public getPomodoroTimeConfig = (): pomodoroTimesStateT => {
     if (!localStorage.getItem("pomodoroTime")) {
       localStorage.setItem('pomodoroTime', JSON.stringify(DEFAULT_POMODORO_TIMES))
       return DEFAULT_POMODORO_TIMES
-
-    } else {
-      return this.getPomodoroTimeFromLocalStorage()
     }
+    return JSON.parse(<string>localStorage.getItem("pomodoroTime"))
   }
-  public getPomodoroTimeFromLocalStorage = () =>
-    localStorage.getItem("pomodoroTime")
-      ? JSON.parse(<string>localStorage.getItem("pomodoroTime"))
-      : DEFAULT_POMODORO_TIMES
 }
 
-export default PomodoroTimeLocalStorage
+export default new PomodoroTimeLocalStorage
 

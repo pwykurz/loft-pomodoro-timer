@@ -17,6 +17,9 @@
 
     --text-primary: #dfdfdf;
 
+    --input-border-color: #dfdfdf;
+    --input-checkbox-checked-bg: #dfdfdf;
+
     --button-background: var(--background-gradient-reverse);
     --button-color: var(--text-primary);
 

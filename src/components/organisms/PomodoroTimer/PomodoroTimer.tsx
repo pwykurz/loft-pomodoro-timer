@@ -20,7 +20,6 @@ const PomodoroTimer: FC = () => {
   const [, setIsPlaying] = useRecoilState(pomodoroTimerState)
 
   const [date, setDate] = useState(Date.now() + pomodoroTime.workTime)
-  const [isBreak, setIsBreak] = useState(false)
   const [sessionCounter, setSessionCounter] = useState(INIT_SESSION_COUNTER)
 
   const workMinutes = pomodoroTime.workTime * MINUTE
@@ -30,13 +29,13 @@ const PomodoroTimer: FC = () => {
   const countdownRef = useRef<Countdown | null>(null)
 
   useEffect(() => {
-    const pomodoroTimeInstance = new PomodoroTimeLocalStorage
-    const pomodoroTimes = pomodoroTimeInstance.setPomodoroTimeFromLocalStorage()
-
+    const pomodoroConfig = PomodoroTimeLocalStorage.getPomodoroTimeConfig()
     setPomodoroTime({
-        'workTime': pomodoroTimes.workTime,
-        'breakTime': pomodoroTimes.breakTime,
-        'longBreakTime': pomodoroTimes.longBreakTime
+        workTime: pomodoroConfig.workTime,
+        breakTime: pomodoroConfig.breakTime,
+        longBreakTime: pomodoroConfig.longBreakTime,
+        isBreak: pomodoroConfig.isBreak,
+        breakAutostart: pomodoroConfig.breakAutostart
     })
 
   }, [])
@@ -44,10 +43,10 @@ const PomodoroTimer: FC = () => {
   useEffect(() => {
     getPomodoroTime()
     breakHandler()
-  },[isBreak, pomodoroTime])
+  },[pomodoroTime])
 
   const breakHandler = () => {
-    if (isBreak) {
+    if (pomodoroTime.isBreak) {
       onPomodoroTimer()
       setIsPlaying(true)
       return
@@ -56,8 +55,8 @@ const PomodoroTimer: FC = () => {
   }
 
   const getPomodoroTime = () => {
-    if (isBreak && sessionCounter % 4 === 0) return setDate( Date.now() + longBreakTime)
-    if (isBreak) return setDate(Date.now() + breakMinutes)
+    if (pomodoroTime.isBreak && sessionCounter % 4 === 0) return setDate( Date.now() + longBreakTime)
+    if (pomodoroTime.isBreak) return setDate(Date.now() + breakMinutes)
     return setDate(Date.now() + workMinutes)
   }
 
@@ -69,9 +68,9 @@ const PomodoroTimer: FC = () => {
 
   const onComplete = () => {
     stop()
-    setIsBreak(prevState => {
-      prevState && onNextSession()
-      return !prevState
+    setPomodoroTime(prevState => {
+      prevState.isBreak && onNextSession()
+      return {...pomodoroTime, isBreak: !prevState.isBreak}
     })
   }
 
@@ -84,7 +83,7 @@ const PomodoroTimer: FC = () => {
   const onNextSession = () => {
     stop()
     setSessionCounter(prevState => prevState + 1)
-    setIsBreak( false)
+    // setIsBreak(false)
   }
 
   const onPomodoroTimer = () => {
@@ -98,7 +97,7 @@ const PomodoroTimer: FC = () => {
   return (
     <div className={cn(styles.pomodoroWrapper)}>
       <hgroup>
-        <h1>{isBreak ? 'Break' : 'Focus'} time</h1>
+        <h1>{pomodoroTime.isBreak ? 'Break' : 'Focus'} time</h1>
         <h2>Session: {sessionCounter}</h2>
       </hgroup>
       <div>

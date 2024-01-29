@@ -1,5 +1,5 @@
 'use client'
-import {useEffect, useMemo, useRef, type FC, useState} from "react"
+import {memo, useEffect, useMemo, useRef, type FC, useState} from "react"
 
 import dynamic from "next/dynamic"
 import ReactPlayer from "react-player"
@@ -52,4 +52,4 @@ const YTPlayer:FC = () => {
    )
 }
 
-export default YTPlayer
+export default memo(YTPlayer)

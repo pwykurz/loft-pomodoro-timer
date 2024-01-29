@@ -1,4 +1,4 @@
-import {type FC, type RefObject} from "react"
+import {memo, type FC, type RefObject} from "react"
 
 import ReactPlayer from "react-player"
 import type {BaseReactPlayerProps} from "react-player/base"
@@ -12,9 +12,7 @@ const VideoPlayer: FC<Props> = ({
   playerRef,
   ytUrl,
   playerProps={}
-}) => {
-  return (
-    <ReactPlayer
+}) => <ReactPlayer
       controls={false}
       height="100%"
       muted
@@ -26,7 +24,5 @@ const VideoPlayer: FC<Props> = ({
       volume={0}
       width="100%"
     />
-  )
-}
 
-export default VideoPlayer
+export default memo(VideoPlayer)

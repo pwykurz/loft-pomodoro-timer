@@ -4,14 +4,13 @@ import {type FC, useEffect, useRef, useState} from 'react'
 import Countdown from "react-countdown"
 import {useRecoilState} from "recoil"
 
+import {BoxWrapper} from "@/components/atom"
 import {PlayButton} from "@/components/molecules"
 import {PomodoroActions, PomodoroRerender} from "@/components/organisms/PomodoroTimer/index"
 import useAlarmSound from "@/hooks/useAlarmSound"
 import PomodoroTimeLocalStorage from "@/lib/initialLocalStorage"
-import {cn} from "@/lib/utils"
 import {pomodoroTimesState, pomodoroTimerState} from "@/storage/PomodoroTimerState"
 
-import styles from './PomodoroTimer.module.scss'
 
 const MINUTE = 60 * 1000
 const INIT_SESSION_COUNTER = 1
@@ -107,7 +106,7 @@ const PomodoroTimer: FC = () => {
   }
 
   return (
-    <div className={cn(styles.pomodoroWrapper)}>
+    <BoxWrapper>
       <hgroup>
         <h1>{pomodoroTime.isBreak ? 'Break' : 'Focus'} time</h1>
         <h2>Session: {sessionCounter}</h2>
@@ -126,7 +125,7 @@ const PomodoroTimer: FC = () => {
         onNextSession={onNextSession}
         onReset={onReset}
       />
-    </div>
+    </BoxWrapper>
   )
 }
 

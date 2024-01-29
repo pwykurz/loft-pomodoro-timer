@@ -1,4 +1,4 @@
-.pomodoroWrapper {
+.boxWrapper {
   background: var(--box-background);
   display: flex;
   flex-direction: column;
@@ -15,8 +15,4 @@
   box-shadow: var(--box-shadow-hover);
   background: rgb(177,1,66);
   background: var(--background-gradient);
-}
-
-.pomodoroButtons {
-
 }

@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import useSound from "use-sound"
 
 import alarmSound from "@/sounds/alarm.mp3"

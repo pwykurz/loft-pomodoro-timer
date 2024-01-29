@@ -14,11 +14,15 @@ import styles from './YTPlayer.module.scss'
 
 const VideoPlayer = dynamic(() => import("@/components/molecules/VideoPlayer"), { ssr: false })
 
+export type PlayerT =
+  (BaseReactPlayerProps & ReactPlayer) | null
+
+
 const YTPlayer:FC = () => {
   const isPlaying = useRecoilValue(pomodoroTimerState)
   const currentVideo = useRecoilValue(currentVideoState)
-  const [ytPlayer, setYTPlayer] = useState(null)
-  const playerRef = useRef<BaseReactPlayerProps & ReactPlayer>(null)
+  const [ytPlayer, setYTPlayer] = useState<PlayerT>(null)
+  const playerRef = useRef<PlayerT>(null)
 
   useEffect(() => {
     setYTPlayer(playerRef.current?.player?.player)

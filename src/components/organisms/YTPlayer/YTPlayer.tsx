@@ -1,5 +1,5 @@
 'use client'
-import {useEffect, useMemo, useRef, type FC} from "react"
+import {useEffect, useMemo, useRef, type FC, useState} from "react"
 
 import dynamic from "next/dynamic"
 import ReactPlayer from "react-player"
@@ -17,10 +17,14 @@ const VideoPlayer = dynamic(() => import("@/components/molecules/VideoPlayer"), 
 const YTPlayer:FC = () => {
   const isPlaying = useRecoilValue(pomodoroTimerState)
   const currentVideo = useRecoilValue(currentVideoState)
+  const [ytPlayer, setYTPlayer] = useState(null)
   const playerRef = useRef<BaseReactPlayerProps & ReactPlayer>(null)
 
   useEffect(() => {
-    const ytPlayer = playerRef.current?.player?.player
+    setYTPlayer(playerRef.current?.player?.player)
+  }, [playerRef.current])
+
+  useEffect(() => {
     if (ytPlayer) {
       if(isPlaying) {
         ytPlayer.unmute()
@@ -30,7 +34,7 @@ const YTPlayer:FC = () => {
         ytPlayer.volume = 0
       }
     }
-  }, [isPlaying])
+  }, [ytPlayer, isPlaying])
 
   const ytUrl = useMemo(() => `https://www.youtube.com/watch?v=${currentVideo}`, [currentVideo])
 

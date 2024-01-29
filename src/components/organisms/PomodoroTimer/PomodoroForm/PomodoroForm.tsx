@@ -21,7 +21,7 @@ import styles from './PomodoroForm.module.scss'
 const formSchema = z.object({
   workTime: z.coerce.number({
     required_error: "Work time is required ",
-  }),
+  }).int().gte(1),
   breakTime: z.coerce.number({
     required_error: "Break time is required",
   }).int().gte(1),
@@ -45,7 +45,11 @@ const PomodoroForm:FC = () => {
   useEffect(() => form.reset(pomodoroTime), [pomodoroTime])
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    const _values = {...values, isBreak: pomodoroTime.isBreak }
+    const _values = {
+      ...values,
+      isBreak: pomodoroTime.isBreak,
+      breakAutostart: pomodoroTime.breakAutostart
+    }
 
     PomodoroTimeLocalStorage.setPomodoroTimeToLocalStorage({..._values})
     setPomodoroTime({..._values})
@@ -88,20 +92,21 @@ const PomodoroForm:FC = () => {
             <FormMessage />
           </FormItem>
         )} />
-        <FormField control={form.control} name="breakAutostart" render={({field}) => (
-          <FormItem className="flex items-end gap-2">
-            <FormControl>
-              <Checkbox
-                checked={field.value}
-                className={styles.checkbox}
-                onCheckedChange={field.onChange}
-              />
-            </FormControl>
-            <FormLabel className={cn(styles.label, "cursor-pointer")}>
-              Enable automatic start time for breaks
-            </FormLabel>
-          </FormItem>
-        )}/>
+        {/* TODO: polishing this option*/}
+        {/*<FormField control={form.control} name="breakAutostart" render={({field}) => (*/}
+        {/*  <FormItem className="flex items-end gap-2">*/}
+        {/*    <FormControl>*/}
+        {/*      <Checkbox*/}
+        {/*        checked={field.value}*/}
+        {/*        className={styles.checkbox}*/}
+        {/*        onCheckedChange={field.onChange}*/}
+        {/*      />*/}
+        {/*    </FormControl>*/}
+        {/*    <FormLabel className={cn(styles.label, "cursor-pointer")}>*/}
+        {/*      Enable automatic start time for breaks*/}
+        {/*    </FormLabel>*/}
+        {/*  </FormItem>*/}
+        {/*)}/>*/}
         <Button className={cn(styles.button, "float-right")} type="submit">Save</Button>
       </form>
     </Form>

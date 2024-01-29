@@ -1,4 +1,5 @@
-export {type FC, type ReactNode} from 'react'
+import {type FC, type ReactNode} from 'react'
+
 import styles from './BoxWrapper.module.scss'
 
 export type Props = {

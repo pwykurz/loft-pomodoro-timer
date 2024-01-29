@@ -47,7 +47,9 @@ const PomodoroForm:FC = () => {
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     const _values = {
       ...values,
-      isBreak: pomodoroTime.isBreak,
+      // TODO: add feature to recognize that is break
+      // isBreak: pomodoroTime.isBreak
+      isBreak: false,
       breakAutostart: pomodoroTime.breakAutostart
     }
 

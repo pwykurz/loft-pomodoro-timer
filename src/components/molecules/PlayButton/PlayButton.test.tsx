@@ -1,5 +1,5 @@
 import {jest, test} from "@jest/globals"
-import { render, screen } from "@testing-library/react"
+import { render } from "@testing-library/react"
 
 import PlayButton from "@/components/molecules/PlayButton/PlayButton"
 

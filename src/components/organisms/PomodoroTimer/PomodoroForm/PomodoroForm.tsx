@@ -7,7 +7,6 @@ import {useRecoilState} from "recoil"
 import * as z from "zod"
 
 import {Button} from "@/components/ui/button"
-import {Checkbox} from "@/components/ui/checkbox"
 import {Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form"
 import {CoffeeCupIcon, FocusIcon, LunchIcon} from "@/components/ui/icons"
 import {Input} from "@/components/ui/input"

@@ -6,6 +6,7 @@ import {useRecoilState} from "recoil"
 
 import {PlayButton} from "@/components/molecules"
 import {PomodoroActions, PomodoroRerender} from "@/components/organisms/PomodoroTimer/index"
+import useAlarmSound from "@/hooks/useAlarmSound"
 import PomodoroTimeLocalStorage from "@/lib/initialLocalStorage"
 import {cn} from "@/lib/utils"
 import {pomodoroTimesState, pomodoroTimerState} from "@/storage/PomodoroTimerState"
@@ -18,6 +19,7 @@ const INIT_SESSION_COUNTER = 1
 const PomodoroTimer: FC = () => {
   const [pomodoroTime, setPomodoroTime] = useRecoilState(pomodoroTimesState)
   const [, setIsPlaying] = useRecoilState(pomodoroTimerState)
+  const [alarm] = useAlarmSound()
 
   const [date, setDate] = useState(Date.now() + pomodoroTime.workTime)
   const [sessionCounter, setSessionCounter] = useState(INIT_SESSION_COUNTER)
@@ -40,18 +42,26 @@ const PomodoroTimer: FC = () => {
 
   }, [])
 
-  useEffect(() => {
-    getPomodoroTime()
-    breakHandler()
-  },[pomodoroTime])
+  useEffect(() => getPomodoroTime(),[pomodoroTime])
 
-  const breakHandler = () => {
-    if (pomodoroTime.isBreak) {
+  const setBreak = (isBreak: boolean) =>
+    setPomodoroTime(prevState =>
+      { return {...prevState, isBreak: isBreak}})
+
+  const breakHandler = (skipBreak = false) => {
+    if (skipBreak) {
+      setIsPlaying(false)
+      setBreak(false)
+      return
+    } else if (pomodoroTime.isBreak) {
       onPomodoroTimer()
       setIsPlaying(true)
+      setBreak(false)
       return
     }
+
     setIsPlaying(false)
+    setBreak(true)
   }
 
   const getPomodoroTime = () => {
@@ -67,7 +77,9 @@ const PomodoroTimer: FC = () => {
   const isPaused = () => countdownRef && countdownRef.current?.isPaused()
 
   const onComplete = () => {
+    alarm()
     stop()
+    setIsPlaying(false)
     setPomodoroTime(prevState => {
       prevState.isBreak && onNextSession()
       return {...pomodoroTime, isBreak: !prevState.isBreak}
@@ -75,15 +87,15 @@ const PomodoroTimer: FC = () => {
   }
 
   const onReset = () => {
-    countdownRef && countdownRef.current?.stop()
+    stop()
+    breakHandler(true)
     setSessionCounter(() => INIT_SESSION_COUNTER)
-    setIsPlaying(false)
   }
 
   const onNextSession = () => {
     stop()
+    breakHandler(true)
     setSessionCounter(prevState => prevState + 1)
-    // setIsBreak(false)
   }
 
   const onPomodoroTimer = () => {

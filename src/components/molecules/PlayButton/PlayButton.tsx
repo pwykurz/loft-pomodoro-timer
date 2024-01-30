@@ -13,7 +13,7 @@ export type Props = {
   onChange: () => void
 }
 
-export const testId = createTestIdObject('ButtonWithPopover', {
+export const testId = createTestIdObject('PlayButton', {
   button: 'button',
 })
 

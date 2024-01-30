@@ -34,7 +34,7 @@ describe('PlayButton Component', () => {
     const playButton = screen.getByTestId(testId.button)
     const label = playButton.querySelector('label')
 
-    fireEvent.click(label)
+    label && fireEvent.click(label)
 
     expect(PlayButtonOnChange).toHaveBeenCalledTimes(1)
   })

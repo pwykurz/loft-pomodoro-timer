@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 
-import {type FC, type ReactNode} from "react"
+import {type ReactNode} from "react"
 
 import {ForwardIcon} from "@heroicons/react/24/solid"
 import {fireEvent, render, screen} from '@testing-library/react'

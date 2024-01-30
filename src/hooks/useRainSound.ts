@@ -2,10 +2,10 @@
 // @ts-nocheck
 import useSound from "use-sound"
 
-import alarmSound from "@/sounds/alarm.mp3"
+import rainSound from "@/sounds/rain.mp3"
 
-const useAlarmSound = () => {
-  const [play, { stop }] = useSound(alarmSound, {
+const useRainSound = () => {
+  const [play, { stop } ] = useSound(rainSound, {
     interrupt: true,
     volume: 1,
   })
@@ -16,4 +16,4 @@ const useAlarmSound = () => {
   return [playHandler, stopHandler]
 }
 
-export default useAlarmSound
+export default useRainSound

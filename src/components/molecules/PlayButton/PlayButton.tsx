@@ -5,7 +5,7 @@ import {useRecoilState} from "recoil"
 
 import {createTestIdObject} from "@/lib/testUtils"
 import {cn} from "@/lib/utils"
-import { pomodoroTimerState } from "@/storage/PomodoroTimerState"
+import {pomodoroIsPlayingState} from "@/storage/PomodoroTimerState"
 
 import styles from './PlayButton.module.scss'
 
@@ -18,7 +18,7 @@ export const testId = createTestIdObject('PlayButton', {
 })
 
 const PlayButton:FC<Props> = ({onChange})  => {
-  const [isPlaying, setIsPlaying] = useRecoilState(pomodoroTimerState)
+  const [isPlaying, setIsPlaying] = useRecoilState(pomodoroIsPlayingState)
 
   const onClick = () => {
     setIsPlaying(prevState => !prevState)

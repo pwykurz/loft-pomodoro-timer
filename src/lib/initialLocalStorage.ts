@@ -4,18 +4,14 @@ export const DEFAULT_POMODORO_TIMES = {
   workTime: 25,
   breakTime: 5,
   longBreakTime: 15,
-  isBreak: false,
-  breakAutostart: false,
 }
 
 class PomodoroTimeLocalStorage {
-  public setPomodoroTimeToLocalStorage = ({longBreakTime, breakTime, workTime, isBreak, breakAutostart}: pomodoroTimesStateT) => {
+  public setPomodoroTimeToLocalStorage = ({longBreakTime, breakTime, workTime}: pomodoroTimesStateT) => {
     return localStorage.setItem('pomodoroTime', JSON.stringify({
       workTime: workTime,
       breakTime: breakTime,
       longBreakTime: longBreakTime,
-      isBreak: isBreak,
-      breakAutostart: breakAutostart
     }))
   }
   public getPomodoroTimeConfig = (): pomodoroTimesStateT => {

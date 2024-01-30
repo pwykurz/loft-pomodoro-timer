@@ -7,7 +7,7 @@ import { type BaseReactPlayerProps } from 'react-player/base'
 import { useRecoilValue} from "recoil"
 
 import YTPlayerList from "@/components/organisms/YTPlayer/YTPlayerList"
-import {pomodoroTimerState} from "@/storage/PomodoroTimerState"
+import {pomodoroIsBreakState, pomodoroIsPlayingState, pomodoroTimerState} from "@/storage/PomodoroTimerState"
 import currentVideoState from "@/storage/YouTubeState"
 
 import styles from './YTPlayer.module.scss'
@@ -19,7 +19,8 @@ export type PlayerT =
 
 
 const YTPlayer:FC = () => {
-  const isPlaying = useRecoilValue(pomodoroTimerState)
+  const isPlaying = useRecoilValue(pomodoroIsPlayingState)
+  const isBreak = useRecoilValue(pomodoroIsBreakState)
   const currentVideo = useRecoilValue(currentVideoState)
   const [ytPlayer, setYTPlayer] = useState<PlayerT>(null)
   const playerRef = useRef<PlayerT>(null)
@@ -29,6 +30,11 @@ const YTPlayer:FC = () => {
   }, [playerRef.current])
 
   useEffect(() => {
+    if (ytPlayer && isBreak) {
+      ytPlayer?.mute()
+      ytPlayer.volume = 0
+      return
+    }
     if (ytPlayer) {
       if(isPlaying) {
         ytPlayer.unmute()

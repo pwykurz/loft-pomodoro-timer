@@ -4,11 +4,11 @@ import {useRecoilState} from "recoil"
 
 import {Loader} from "@/components/molecules"
 import {PomodoroTimer} from "@/components/organisms/PomodoroTimer"
-import {pomodoroLoading} from "@/storage/PomodoroTimerState"
+import {pomodoroLoadingState} from "@/storage/PomodoroTimerState"
 
 const LOADER_TIME = 3000
 const MainPage = () => {
-  const [loading, setLoading] = useRecoilState(pomodoroLoading)
+  const [loading, setLoading] = useRecoilState(pomodoroLoadingState)
 
   useEffect(() => {
     const timer = setTimeout(() => {

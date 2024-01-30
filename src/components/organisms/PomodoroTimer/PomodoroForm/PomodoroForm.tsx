@@ -13,27 +13,25 @@ import {Input} from "@/components/ui/input"
 import PomodoroTimeLocalStorage from "@/lib/initialLocalStorage"
 import {cn} from "@/lib/utils"
 import {dialogState} from "@/storage/DialogState"
-import {pomodoroTimesState} from "@/storage/PomodoroTimerState"
+import {pomodoroTimerState} from "@/storage/PomodoroTimerState"
 
 import styles from './PomodoroForm.module.scss'
 
 const formSchema = z.object({
   workTime: z.coerce.number({
     required_error: "Work time is required ",
-  }).int().gte(1),
+  }),
   breakTime: z.coerce.number({
     required_error: "Break time is required",
-  }).int().gte(1),
+  }),
   longBreakTime: z.coerce.number({
     required_error: "Long break time is required",
   }).int().gte(1),
-  isBreak: z.boolean(),
-  breakAutostart: z.boolean()
 }).required()
 
 const PomodoroForm:FC = () => {
   const [,setOpen] = useRecoilState(dialogState)
-  const [pomodoroTime, setPomodoroTime] = useRecoilState(pomodoroTimesState)
+  const [pomodoroTime, setPomodoroTime] = useRecoilState(pomodoroTimerState)
 
   const form = useForm<z.infer<typeof formSchema>>({
       resolver: zodResolver(formSchema),
@@ -44,16 +42,8 @@ const PomodoroForm:FC = () => {
   useEffect(() => form.reset(pomodoroTime), [pomodoroTime])
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    const _values = {
-      ...values,
-      // TODO: add feature to recognize that is break
-      // isBreak: pomodoroTime.isBreak
-      isBreak: false,
-      breakAutostart: pomodoroTime.breakAutostart
-    }
-
-    PomodoroTimeLocalStorage.setPomodoroTimeToLocalStorage({..._values})
-    setPomodoroTime({..._values})
+    PomodoroTimeLocalStorage.setPomodoroTimeToLocalStorage({...values})
+    setPomodoroTime({...values})
     setOpen(false)
   }
 
@@ -93,21 +83,6 @@ const PomodoroForm:FC = () => {
             <FormMessage />
           </FormItem>
         )} />
-        {/* TODO: polishing this option*/}
-        {/*<FormField control={form.control} name="breakAutostart" render={({field}) => (*/}
-        {/*  <FormItem className="flex items-end gap-2">*/}
-        {/*    <FormControl>*/}
-        {/*      <Checkbox*/}
-        {/*        checked={field.value}*/}
-        {/*        className={styles.checkbox}*/}
-        {/*        onCheckedChange={field.onChange}*/}
-        {/*      />*/}
-        {/*    </FormControl>*/}
-        {/*    <FormLabel className={cn(styles.label, "cursor-pointer")}>*/}
-        {/*      Enable automatic start time for breaks*/}
-        {/*    </FormLabel>*/}
-        {/*  </FormItem>*/}
-        {/*)}/>*/}
         <Button className={cn(styles.button, "float-right")} type="submit">Save</Button>
       </form>
     </Form>

@@ -7,7 +7,7 @@ import { type BaseReactPlayerProps } from 'react-player/base'
 import { useRecoilValue} from "recoil"
 
 import YTPlayerList from "@/components/organisms/YTPlayer/YTPlayerList"
-import {pomodoroIsBreakState, pomodoroIsPlayingState, pomodoroTimerState} from "@/storage/PomodoroTimerState"
+import {pomodoroIsBreakState, pomodoroIsPlayingState} from "@/storage/PomodoroTimerState"
 import currentVideoState from "@/storage/YouTubeState"
 
 import styles from './YTPlayer.module.scss'

@@ -5,6 +5,6 @@ describe('Youtube Player', () => {
   it('should render correctly', () => {
     const ytList = YouTubeAPI.getStaticVideoList()
 
-    console.log(VIDEO_LIST, ytList)
+    expect(ytList).toBe(VIDEO_LIST)
   })
 })

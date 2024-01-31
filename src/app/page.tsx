@@ -5,7 +5,6 @@ import {RecoilRoot} from "recoil"
 import MainPage from "@/components/organisms/MainPage"
 import YTPlayer from "@/components/organisms/YTPlayer"
 
-
 const robotoFlex = Roboto_Flex({subsets: ['latin']})
 export default function Home() {
   return (

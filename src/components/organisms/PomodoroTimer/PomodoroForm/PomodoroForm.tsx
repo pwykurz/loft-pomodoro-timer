@@ -20,10 +20,10 @@ import styles from './PomodoroForm.module.scss'
 const formSchema = z.object({
   workTime: z.coerce.number({
     required_error: "Work time is required ",
-  }),
+  }).int().gte(1),
   breakTime: z.coerce.number({
     required_error: "Break time is required",
-  }),
+  }).int().gte(1),
   longBreakTime: z.coerce.number({
     required_error: "Long break time is required",
   }).int().gte(1),

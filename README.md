@@ -2,6 +2,9 @@
 
 Pomodoro Loft Timer is a simple, efficient, and user-friendly Pomodoro Technique timer application designed to boost productivity.  This application helps users to break their work into intervals, traditionally 25 minutes in length, separated by short breaks.
 
+### Demo
+https://loft-pomodoro-timer.com/
+
 ### Features
 * Customizable Work Sessions: Set the duration of your work sessions.
 * Short and Long Breaks: Configure the lengths of your short and long breaks.
@@ -25,9 +28,6 @@ Run the application:
 ```bash
 npm start
 ```
-
-### Demo
-https://loft-pomodoro-timer.com/
 
 ### Usage
 After starting the application, you can set the durations for work sessions and breaks according to your preference. Click 'Play button' to begin a work session and follow the prompts for breaks and subsequent sessions.

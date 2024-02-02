@@ -85,12 +85,14 @@ const PomodoroTimer: FC = () => {
   const onReset = () => {
     stop()
     breakHandler(true)
+    setIsPlaying(false)
     setSessionCounter(() => INIT_SESSION_COUNTER)
   }
 
   const onNextSession = (isBreak = false) => {
     stop()
     isBreak && setIsBreak(false)
+    setIsPlaying(false)
     setSessionCounter(prevState => prevState + 1)
   }
 

@@ -26,7 +26,7 @@ npm install
 ```
 Run the application:
 ```bash
-npm start
+npm run dev
 ```
 
 ### Usage

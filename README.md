@@ -3,7 +3,7 @@
 Pomodoro Loft Timer is a simple, efficient, and user-friendly Pomodoro Technique timer application designed to boost productivity.  This application helps users to break their work into intervals, traditionally 25 minutes in length, separated by short breaks.
 
 ### Demo
-https://loft-pomodoro-timer.com/
+<a href="https://loft-pomodoro-timer.com/" target="_blank">https://loft-pomodoro-timer.com/</a>
 
 ### Features
 * Customizable Work Sessions: Set the duration of your work sessions.

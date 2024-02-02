@@ -19,11 +19,11 @@ cd pomodoro-loft-timer
 ```
 Install the dependencies:
 ```bash
-yarn install
+npm install
 ```
 Run the application:
 ```bash
-yarn start
+npm start
 ```
 
 ### Usage

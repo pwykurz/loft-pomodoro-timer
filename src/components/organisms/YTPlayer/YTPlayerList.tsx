@@ -11,7 +11,6 @@ import useClickOutside from "@/hooks/useClickOutside"
 import {cn} from "@/lib/utils"
 import currentVideoState from "@/storage/YouTubeState"
 
-
 import styles from './YTPlayer.module.scss'
 
 const YTPlayerList:FC = () => {
@@ -31,16 +30,19 @@ const YTPlayerList:FC = () => {
   useEffect(() => setMusicList(fetchChannels()), [])
 
   const openHandler = () => setOpen(prevState => !prevState)
+  const chooseMusicHandler = (key: string) => {
+    setCurrentVideo(key)
+    openHandler()
+  }
 
   return (
     <div className={cn(styles.ytPlayerList, {[styles.ytPlayerListShow]: open})} ref={listRef}>
       <div className={styles.tab} onClick={openHandler}>Choose music</div>
       <ul className={styles.ytList}>
         {musicList && musicList.length > 0 &&
-        musicList.map((music: BaseReactPlayerProps, key: number) => {
+        musicList.map((music: BaseReactPlayerProps) => {
           return (
-          <li className={styles.item} key={key} onClick={() => {
-            setCurrentVideo(music.key)}}>
+          <li className={styles.item} key={music.key} onClick={() => chooseMusicHandler(music.key)}>
             <span>
               <Image
                 alt={music.title}
@@ -49,7 +51,7 @@ const YTPlayerList:FC = () => {
                 width={96}
               />
             </span>
-            <span className={styles.titleGroup}>
+            <span>
               <h3 className={styles.title}>{music.title}</h3>
               <h4 className={styles.subtitle}>Channel name: {music.channelName}</h4>
               <a className={styles.link} href={`https://www.youtube.com/watch?v=${music.key}`} target="_blank">

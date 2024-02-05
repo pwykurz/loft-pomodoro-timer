@@ -1,10 +1,12 @@
+@import "src/app/mediaQueries.module.scss";
+
 .boxWrapper {
   background: var(--box-background);
   display: flex;
   flex-direction: column;
   gap: 20px;
   align-items: center;
-  padding: 30px;
+  justify-content: center;
   top: 50%;
   left: 50%;
   border: 1px solid;
@@ -15,4 +17,12 @@
   box-shadow: var(--box-shadow-hover);
   background: rgb(177,1,66);
   background: var(--background-gradient);
+  width: 100%;
+  height: 100%;
+
+  @include gt-sm {
+    padding: 30px;
+    width: auto;
+    height: auto;
+  }
 }

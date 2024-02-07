@@ -4,11 +4,11 @@ import {memo, useEffect, useMemo, useRef, type FC, useState} from "react"
 import dynamic from "next/dynamic"
 import ReactPlayer from "react-player"
 import { type BaseReactPlayerProps } from 'react-player/base'
-import { useRecoilValue} from "recoil"
+import {useRecoilValue} from "recoil"
 
 import YTPlayerList from "@/components/organisms/YTPlayer/YTPlayerList"
 import {pomodoroIsBreakState, pomodoroIsPlayingState} from "@/storage/PomodoroTimerState"
-import currentVideoState from "@/storage/YouTubeState"
+import {currentVideoState, videoPlayerConfig} from "@/storage/YouTubeState"
 
 import styles from './YTPlayer.module.scss'
 
@@ -22,6 +22,7 @@ const YTPlayer:FC = () => {
   const isPlaying = useRecoilValue(pomodoroIsPlayingState)
   const isBreak = useRecoilValue(pomodoroIsBreakState)
   const currentVideo = useRecoilValue(currentVideoState)
+  const playerConfig = useRecoilValue(videoPlayerConfig)
   const [ytPlayer, setYTPlayer] = useState<PlayerT>(null)
   const playerRef = useRef<PlayerT>(null)
 
@@ -38,7 +39,7 @@ const YTPlayer:FC = () => {
     if (ytPlayer) {
       if(isPlaying) {
         ytPlayer.unmute()
-        ytPlayer.volume = 1
+        ytPlayer.volume = playerConfig.volume
       } else {
         ytPlayer?.mute()
         ytPlayer.volume = 0

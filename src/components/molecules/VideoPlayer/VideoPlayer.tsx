@@ -6,12 +6,12 @@ import type {BaseReactPlayerProps} from "react-player/base"
 export type Props = {
   playerRef: RefObject<BaseReactPlayerProps & ReactPlayer>,
   ytUrl: string,
-  playerProps?: BaseReactPlayerProps
+  playerProps?: BaseReactPlayerProps,
 }
 const VideoPlayer: FC<Props> = ({
   playerRef,
   ytUrl,
-  playerProps={}
+  playerProps={},
 }) => <ReactPlayer
       controls={false}
       height="100%"
@@ -21,7 +21,7 @@ const VideoPlayer: FC<Props> = ({
       playing
       ref={playerRef}
       url={ytUrl}
-      volume={0}
+      volume="0"
       width="100%"
     />
 

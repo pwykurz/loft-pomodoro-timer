@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import url('./variables.css');
+@import url('../components/molecules/VolumeSlider/slider.css');
 
 @layer base {
   :root {

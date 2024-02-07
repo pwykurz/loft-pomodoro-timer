@@ -6,7 +6,9 @@ import {useRecoilState} from "recoil"
 
 import {BoxWrapper} from "@/components/atom"
 import {PlayButton} from "@/components/molecules"
+import VolumeSlider from "@/components/molecules/VolumeSlider"
 import {PomodoroActions, PomodoroRerender} from "@/components/organisms/PomodoroTimer/index"
+import {Slider} from "@/components/ui/slider"
 import useAlarmSound from "@/hooks/useAlarmSound"
 import useRainSound from "@/hooks/useRainSound"
 import PomodoroTimeLocalStorage from "@/lib/initialLocalStorage"
@@ -106,17 +108,19 @@ const PomodoroTimer: FC = () => {
 
   return (
     <BoxWrapper>
+      <VolumeSlider defaultValue={[0]} max={100} min={0} step={1} />
+      <div>sound options</div>
       <hgroup>
         <h1>{isBreak ? 'Break' : 'Focus'} time</h1>
         <h2>Session: {sessionCounter}</h2>
       </hgroup>
       <div>
         <Countdown
-            autoStart={false}
-            date={date}
-            onComplete={onComplete}
-            ref={countdownRef}
-            renderer={PomodoroRerender}
+          autoStart={false}
+          date={date}
+          onComplete={onComplete}
+          ref={countdownRef}
+          renderer={PomodoroRerender}
         />
         <PlayButton onChange={onPomodoroTimer}/>
       </div>

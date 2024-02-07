@@ -2,9 +2,14 @@ import {atom} from "recoil"
 
 const DEFAULT_VIDEO = '6jKDMA6rLpY'
 
-const currentVideoState = atom({
+export const currentVideoState = atom({
   key: 'currentVideo',
   default: DEFAULT_VIDEO
 })
 
-export default currentVideoState
+export const videoPlayerConfig = atom({
+  key: 'playerConfig',
+  default: {
+    volume: 0
+  }
+})

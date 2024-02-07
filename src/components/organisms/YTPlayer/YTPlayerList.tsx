@@ -9,7 +9,7 @@ import {useRecoilState} from "recoil"
 import YouTubeAPI from "@/api/ytPlayer/ytPlayer"
 import useClickOutside from "@/hooks/useClickOutside"
 import {cn} from "@/lib/utils"
-import currentVideoState from "@/storage/YouTubeState"
+import { currentVideoState } from "@/storage/YouTubeState"
 
 import styles from './YTPlayer.module.scss'
 

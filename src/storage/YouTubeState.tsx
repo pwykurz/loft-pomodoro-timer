@@ -10,6 +10,6 @@ export const currentVideoState = atom({
 export const videoPlayerConfig = atom({
   key: 'playerConfig',
   default: {
-    volume: 0
+    volume: 0.2
   }
 })

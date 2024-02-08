@@ -1,0 +1,39 @@
+.sliderRoot {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    &[data-orientation='vertical'] {
+        flex-direction: column;
+        width: 20px;
+        height: 100%;
+    }
+}
+
+.sliderTrack {
+    position: relative;
+    flex-grow: 1;
+    background-color: var(--volume-track);
+
+    &[data-orientation='vertical'] {
+        width: 3px;
+    }
+}
+
+.sliderRange {
+    position: absolute;
+    background-color: var(--volume-range);
+
+    &[data-orientation='vertical'] {
+        width: 100%;
+    }
+}
+
+.sliderThumb {
+    border-radius: 50%;
+    display: block;
+    width: 15px;
+    height: 15px;
+    background-color: var(--volume-thumb);
+    box-shadow: 0 0 10px 2px var(--box-shadow-color);
+}

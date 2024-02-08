@@ -1,4 +1,7 @@
 :root {
+    --default-color: #b10142;
+    --secondary-color: #2f0138;
+
     --background: rgb(177,1,66);
     --background-gradient: linear-gradient(45deg, rgba(177,1,66,0.8) 0%, rgba(47,1,56,0.8) 100%);
     --background-gradient-reverse: linear-gradient(45deg, rgba(47,1,56,0.9)  0%, rgba(177,1,66,0.9) 100%);
@@ -24,4 +27,8 @@
     --button-color: var(--text-primary);
 
     --transition-default: all .2s linear;
+
+    --volume-track: var(--secondary-color);
+    --volume-range: var(--default-color);
+    --volume-thumb: var(--default-color);
 }

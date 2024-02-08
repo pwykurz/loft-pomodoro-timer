@@ -1,14 +1,13 @@
 .wrapper {
   position: absolute;
-  left: 0;
-  top: 0;
+  right: 0;
+  top: 30px;
   width: auto;
+  padding: 0 10px;
+  height: 50%;
+
+  svg {
+    width: 16px;
+    margin: 5px 0;
+  }
 }
-
-.slider {
-  height: 200px;
-  width: 10px;
-}
-
-
-

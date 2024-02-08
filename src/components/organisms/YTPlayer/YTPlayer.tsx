@@ -26,24 +26,22 @@ const YTPlayer:FC = () => {
   const [ytPlayer, setYTPlayer] = useState<PlayerT>(null)
   const playerRef = useRef<PlayerT>(null)
 
-  useEffect(() => {
+  useEffect(() =>
     setYTPlayer(playerRef.current?.player?.player)
-  }, [playerRef.current])
+  , [playerRef.current])
 
   useEffect(() => {
     if (ytPlayer && isBreak) {
-      ytPlayer?.mute()
-      ytPlayer.volume = 0
+      ytPlayer.mute()
       return
     }
+
     if (ytPlayer) {
-      if(isPlaying) {
+      if (isPlaying) {
         ytPlayer.unmute()
-        ytPlayer.volume = playerConfig.volume
-      } else {
-        ytPlayer?.mute()
-        ytPlayer.volume = 0
+        return
       }
+      ytPlayer.mute()
     }
   }, [ytPlayer, isPlaying])
 
@@ -53,7 +51,7 @@ const YTPlayer:FC = () => {
     <>
       <YTPlayerList />
       <div className={styles.ytPlayerWrapper}>
-        <VideoPlayer playerRef={playerRef} ytUrl={ytUrl} />
+        <VideoPlayer playerRef={playerRef} volume={playerConfig.volume} ytUrl={ytUrl} />
       </div>
     </>
    )

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 export type VideoListT = {
   title: string,
   key: string,
@@ -7,6 +9,20 @@ export type VideoListT = {
 }
 
 export const VIDEO_LIST: VideoListT[] = [
+  {
+    title: 'ＣＩＴＹ ＶＩＥＷ [ Synthwave - Retrowave Mix ]',
+    key: 'SH73CfL3oUA',
+    thumbnailUrl: 'https://i.ytimg.com/vi/SH73CfL3oUA/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGFAgNCh_MA8=&rs=AOn4CLDTUMaMtjZk66K_eRdUDSOFOGn06g',
+    channelName: 'LoFi Studio',
+    channelYTName: '@LofiStudioOne',
+  },
+  {
+    title: 'Back To The 80\'s | Best of Synthwave And Retro Electro Music Mix 2020',
+    key: 'ajTTZ7iy6Ls',
+    thumbnailUrl: 'https://i.ytimg.com/vi/ajTTZ7iy6Ls/maxresdefault.jpg',
+    channelName: 'WolfAyoub',
+    channelYTName: '@WolfAyoub21',
+  },
   {
     title: 'Sub Zero: Dark Sci Fi Music For Winter Relaxation (Deep And Relaxing)',
     key: 'n--SX54AUZU',

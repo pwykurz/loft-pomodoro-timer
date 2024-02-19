@@ -1,5 +1,6 @@
 import {ReactNode} from "react"
 
+import { GoogleTagManager } from '@next/third-parties/google'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
@@ -23,7 +24,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-      {children}
+        {children}
+        <GoogleTagManager gtmId="G-447ZX8V6C6" />
       </body>
     </html>
   )

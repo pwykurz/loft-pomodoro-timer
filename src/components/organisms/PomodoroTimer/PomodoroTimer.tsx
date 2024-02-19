@@ -2,7 +2,7 @@
 import {type FC, useEffect, useRef, useState} from 'react'
 
 import Countdown from "react-countdown"
-import {useRecoilState} from "recoil"
+import {useRecoilState, useSetRecoilState} from "recoil"
 
 import {BoxWrapper} from "@/components/atom"
 import {PlayButton} from "@/components/molecules"
@@ -19,7 +19,7 @@ const INIT_SESSION_COUNTER = 1
 
 const PomodoroTimer: FC = () => {
   const [pomodoroTime, setPomodoroTime] = useRecoilState(pomodoroTimerState)
-  const [, setIsPlaying] = useRecoilState(pomodoroIsPlayingState)
+  const setIsPlaying = useSetRecoilState(pomodoroIsPlayingState)
   const [isBreak, setIsBreak] = useRecoilState(pomodoroIsBreakState)
   const [alarmPlay] = useAlarmSound()
   const [rainPlay, rainStop] = useRainSound()
@@ -46,18 +46,14 @@ const PomodoroTimer: FC = () => {
   ,[pomodoroTime, isBreak, sessionCounter])
 
   const breakHandler = (skipBreak = false) => {
-    if (skipBreak) {
+    if (skipBreak || isBreak) {
       setIsBreak(false)
       setIsPlaying(false)
-      return
-    } else if (isBreak) {
-      onPomodoroTimer()
-      setIsBreak(false)
-      setIsPlaying(true)
-      return
+      return { isBreak: false, isPlaying: false }
     }
     setIsBreak(true)
     setIsPlaying(false)
+    return { isBreak: true, isPlaying: false }
   }
 
   const getPomodoroTime = () => {
@@ -75,25 +71,23 @@ const PomodoroTimer: FC = () => {
   const onComplete = () => {
     alarmPlay()
     rainStop()
-    setIsBreak(prevState => {
-      prevState && onNextSession()
-      !prevState && rainPlay()
-      return !prevState
-    })
+
+    setIsBreak(prevState => !prevState)
     setIsPlaying(prevState => !prevState)
+
+    isBreak && onNextSession()
+    !isBreak && rainPlay()
   }
 
   const onReset = () => {
     stop()
     breakHandler(true)
-    setIsPlaying(false)
     setSessionCounter(() => INIT_SESSION_COUNTER)
   }
 
-  const onNextSession = (isBreak = false) => {
+  const onNextSession = () => {
     stop()
-    isBreak && setIsBreak(false)
-    setIsPlaying(false)
+    breakHandler(true)
     setSessionCounter(prevState => prevState + 1)
   }
 

@@ -10,6 +10,27 @@ export type VideoListT = {
 
 export const VIDEO_LIST: VideoListT[] = [
   {
+    title: 'Scenic 🌱 Lofi Keep You Safe 🌳 Take a break and breath ~ Lofi Songs Mix for [ Sleep - Relax - Study ]',
+    key: 'szr4tk414Z0',
+    thumbnailUrl: 'https://i.ytimg.com/vi/szr4tk414Z0/default.jpg',
+    channelName: 'LOFI KEEP YOU SAFE',
+    channelYTName: '@lofikeepyousafe',
+  },
+  {
+    title: 'Futuristic Cyber Chill Music to Boost Your Workflow',
+    key: 'dKAfCLEBC3s',
+    thumbnailUrl: 'https://i.ytimg.com/vi/dKAfCLEBC3s/default.jpg',
+    channelName: 'Chill Music Lab',
+    channelYTName: '@MusicLabChill',
+  },
+  {
+    title: 'Late Study Rainy Night 🌧️ Rainy Lofi Songs To Make You Deep Focus On Your Work 🌧️ Lofi Hip Hop Beats',
+    key: '_mBxyrKycuE',
+    thumbnailUrl: 'https://i.ytimg.com/vi/_mBxyrKycuE/default.jpg',
+    channelName: 'Lofi Everyday',
+    channelYTName: '@lofieveryday364',
+  },
+  {
     title: 'ＣＩＴＹ ＶＩＥＷ [ Synthwave - Retrowave Mix ]',
     key: 'SH73CfL3oUA',
     thumbnailUrl: 'https://i.ytimg.com/vi/SH73CfL3oUA/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGFAgNCh_MA8=&rs=AOn4CLDTUMaMtjZk66K_eRdUDSOFOGn06g',

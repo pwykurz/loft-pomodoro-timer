@@ -1,0 +1,11 @@
+@import "src/app/mediaQueries.module.scss";
+
+.link {
+  font-size: 12px;
+  color: var(--link-color);
+  transition: var(--transition-default);
+
+  &:hover {
+    color: var(--link-color-hover);
+  }
+}

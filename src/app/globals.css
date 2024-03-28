@@ -77,8 +77,8 @@
     color: var(--text-primary);
     background-color: #000;
     background-image: url('../images/pomodoro-2-dark.jpg');
-    background-repeat:no-repeat;
-    background-size:cover;
-    background-opacity: .1;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-opacity: 0.1;
   }
 }

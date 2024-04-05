@@ -4,6 +4,7 @@ import { RecoilRoot } from 'recoil'
 
 import Footer from '@/components/molecules/Footer'
 import MainPage from '@/components/organisms/MainPage'
+import TabsWrapper from '@/components/organisms/TabsWrapper'
 import YTPlayer from '@/components/organisms/YTPlayer'
 
 const robotoFlex = Roboto_Flex({ subsets: ['latin'] })
@@ -15,6 +16,7 @@ export default function Home() {
       >
         <MainPage />
         <YTPlayer />
+        <TabsWrapper />
         <Footer />
       </main>
     </RecoilRoot>

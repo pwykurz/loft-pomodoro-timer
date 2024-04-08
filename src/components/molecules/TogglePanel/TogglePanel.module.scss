@@ -1,0 +1,58 @@
+@import "src/app/mediaQueries.module.scss";
+
+.togglePanel {
+  cursor: pointer;
+  top: 0;
+  right: calc(-90vw + 10px);
+  position: fixed;
+  white-space: nowrap;
+  display: inline-block;
+  height: 100%;
+  transition: right 0.2s linear;
+
+  @include gt-sm {
+    right: -50vw;
+    width: 50vw;
+  }
+}
+
+.open {
+  right: 0;
+}
+
+%boxClass {
+  padding: 20px 10px;
+}
+
+.header {
+  @extend %boxClass;
+  position: absolute;
+  top: 50%;
+  left: -44px;
+  transform: translateY(-50%) rotate(180deg);
+  writing-mode: vertical-rl;
+  background: var(--background-gradient-reverse);
+  box-shadow: 4px 0 10px var(--box-shadow-color);
+  z-index: 0;
+  transition: var(--transition-default);
+
+  &:hover {
+    box-shadow: 4px 0 30px var(--box-shadow-color);
+  }
+}
+
+.body {
+  @extend %boxClass;
+  background: var(--background-gradient-90deg-secondary);
+  max-width: calc(90vw - 10px);
+  height: 100%;
+  width: 100%;
+  box-shadow: 0 0 10px var(--box-shadow-color);
+  transition: var(--transition-default);
+
+  @include gt-sm {
+    right: -50vw;
+    width: 50vw;
+  }
+}
+

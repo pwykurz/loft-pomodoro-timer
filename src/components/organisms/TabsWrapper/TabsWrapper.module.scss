@@ -1,22 +1,6 @@
 @import "src/app/mediaQueries.module.scss";
 
-.tab {
-  cursor: pointer;
-  padding: 20px 10px;
-  position: absolute;
-  left: -44px;
-  top: 50%;
-  transform: translateY(-50%) rotate(180deg);
-  writing-mode: vertical-rl;
-  white-space: nowrap;
-  display: inline-block;
-  background: var(--background-gradient-reverse);
-  box-shadow: 4px 0 10px var(--box-shadow-color);
-  z-index: -2;
-  transition: var(--transition-default);
-
-  &:hover {
-    box-shadow: 4px 0 30px var(--box-shadow-color);
-  }
+.tab1 {
+  top: calc(50% - 130px);
 }
 

@@ -3,8 +3,8 @@ import { Roboto_Flex } from 'next/font/google'
 import { RecoilRoot } from 'recoil'
 
 import Footer from '@/components/molecules/Footer'
+import TabsWrapper from '@/components/molecules/TabsWrapper'
 import MainPage from '@/components/organisms/MainPage'
-import TabsWrapper from '@/components/organisms/TabsWrapper'
 import YTPlayer from '@/components/organisms/YTPlayer'
 
 const robotoFlex = Roboto_Flex({ subsets: ['latin'] })

@@ -1,10 +1,14 @@
-import TabPanel from '@/components/molecules/TabPanel/TabPanel'
-import TabsList from '@/components/molecules/TabsList/TabsList'
+import TogglePanel from '@/components/molecules/TogglePanel'
+import YTPlayerList from '@/components/organisms/YTPlayerList'
+
+import styles from './TabsWrapper.module.scss'
 
 const TabsWrapper = () => (
   <div>
-    <TabsList tabs={['test 1', 'test 2']} />
-    <TabPanel />
+    <TogglePanel header='ToDos'>TOdosy</TogglePanel>
+    <TogglePanel className={{ header: styles.tab1 }} header='Choose music'>
+      <YTPlayerList />
+    </TogglePanel>
   </div>
 )
 

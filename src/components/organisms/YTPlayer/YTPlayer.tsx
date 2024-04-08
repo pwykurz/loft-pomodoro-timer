@@ -1,24 +1,27 @@
 'use client'
-import {memo, useEffect, useMemo, useRef, type FC, useState} from "react"
+import { memo, useEffect, useMemo, useRef, useState, type FC } from 'react'
 
-import dynamic from "next/dynamic"
-import ReactPlayer from "react-player"
+import dynamic from 'next/dynamic'
+import ReactPlayer from 'react-player'
 import { type BaseReactPlayerProps } from 'react-player/base'
-import {useRecoilValue} from "recoil"
+import { useRecoilValue } from 'recoil'
 
-import YTPlayerList from "@/components/organisms/YTPlayer/YTPlayerList"
-import {pomodoroIsBreakState, pomodoroIsPlayingState} from "@/storage/PomodoroTimerState"
-import {currentVideoState, videoPlayerConfig} from "@/storage/YouTubeState"
+import {
+  pomodoroIsBreakState,
+  pomodoroIsPlayingState,
+} from '@/storage/PomodoroTimerState'
+import { currentVideoState, videoPlayerConfig } from '@/storage/YouTubeState'
 
 import styles from './YTPlayer.module.scss'
 
-const VideoPlayer = dynamic(() => import("@/components/molecules/VideoPlayer"), { ssr: false })
+const VideoPlayer = dynamic(
+  () => import('@/components/molecules/VideoPlayer'),
+  { ssr: false }
+)
 
-export type PlayerT =
-  (BaseReactPlayerProps & ReactPlayer) | null
+export type PlayerT = (BaseReactPlayerProps & ReactPlayer) | null
 
-
-const YTPlayer:FC = () => {
+const YTPlayer: FC = () => {
   const isPlaying = useRecoilValue(pomodoroIsPlayingState)
   const isBreak = useRecoilValue(pomodoroIsBreakState)
   const currentVideo = useRecoilValue(currentVideoState)
@@ -26,9 +29,10 @@ const YTPlayer:FC = () => {
   const [ytPlayer, setYTPlayer] = useState<PlayerT>(null)
   const playerRef = useRef<PlayerT>(null)
 
-  useEffect(() =>
-    setYTPlayer(playerRef.current?.player?.player)
-  , [playerRef.current])
+  useEffect(
+    () => setYTPlayer(playerRef.current?.player?.player),
+    [playerRef.current]
+  )
 
   useEffect(() => {
     if (ytPlayer && isBreak) {
@@ -45,16 +49,20 @@ const YTPlayer:FC = () => {
     }
   }, [ytPlayer, isPlaying])
 
-  const ytUrl = useMemo(() => `https://www.youtube.com/watch?v=${currentVideo}`, [currentVideo])
+  const ytUrl = useMemo(
+    () => `https://www.youtube.com/watch?v=${currentVideo}`,
+    [currentVideo]
+  )
 
   return (
-    <>
-      <YTPlayerList />
-      <div className={styles.ytPlayerWrapper}>
-        <VideoPlayer playerRef={playerRef} volume={playerConfig.volume} ytUrl={ytUrl} />
-      </div>
-    </>
-   )
+    <div className={styles.ytPlayerWrapper}>
+      <VideoPlayer
+        playerRef={playerRef}
+        volume={playerConfig.volume}
+        ytUrl={ytUrl}
+      />
+    </div>
+  )
 }
 
 export default memo(YTPlayer)

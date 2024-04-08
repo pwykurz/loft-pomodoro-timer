@@ -1,0 +1,76 @@
+@import "src/app/mediaQueries.module.scss";
+
+.ytPlayerList {
+  width: 100%;
+}
+
+.item {
+  cursor: pointer;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--box-shadow-color);
+  transition: var(--transition-default);
+
+  &:hover {
+    background: var(--background-gradient-90deg-secondary);
+  }
+}
+
+.listTitle {
+  padding: 10px 20px;
+  border-bottom: 1px solid;
+  font-weight: 100;
+}
+
+.ytList {
+  height: 100vh;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.title {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 45vw;
+  overflow: hidden;
+  font-size: 16px;
+  font-weight: 400;
+
+
+  @include gt-xs {
+    right: calc(-40vw + 10px);
+    max-width: 65vw;
+  }
+
+  @include gt-sm {
+    right: calc(-40vw + 10px);
+    max-width: 35vw;
+  }
+}
+
+.subtitle {
+  @extend .title;
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.link {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 14px;
+  color: var(--link-color);
+  transition: var(--transition-default);
+item
+  &:hover {
+    color: var(--link-color-hover);
+  }
+
+  svg {
+    display: inline-block;
+    vertical-align: text-top;
+    margin-left: 5px;
+    width: 15px;
+  }
+}

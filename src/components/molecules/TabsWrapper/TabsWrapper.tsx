@@ -5,8 +5,10 @@ import styles from './TabsWrapper.module.scss'
 
 const TabsWrapper = () => (
   <div>
-    <TogglePanel header='ToDos'>TOdosy</TogglePanel>
-    <TogglePanel className={{ header: styles.tab1 }} header='Choose music'>
+    <TogglePanel className={{ header: styles.tab1 }} header='ToDos'>
+      TOdosy
+    </TogglePanel>
+    <TogglePanel header='Choose music'>
       <YTPlayerList />
     </TogglePanel>
   </div>

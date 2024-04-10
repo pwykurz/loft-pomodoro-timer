@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState, type FC, type ReactNode } from 'react'
+import { useRef, useState, type FC, type ReactNode } from 'react'
 
-import useClickOutside from '@/hooks/useClickOutside'
+import { useOnClickOutside } from 'usehooks-ts'
+
 import { cn } from '@/lib/utils'
 
 import styles from './TogglePanel.module.scss'
@@ -16,15 +17,15 @@ export type Props = {
 
 const TogglePanel: FC<Props> = ({ header, children, className }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const toggle = () => setIsOpen((prev) => !prev)
+  const open = () => setIsOpen(() => true)
 
-  const panelRef = useRef(null)
+  const bodyRef = useRef(null)
 
-  const isClickedOutside = useClickOutside(panelRef)
+  const handleClickOutside = () => {
+    setIsOpen(() => false)
+  }
 
-  useEffect(() => {
-    isClickedOutside && setIsOpen(() => false)
-  }, [isClickedOutside])
+  useOnClickOutside(bodyRef, handleClickOutside)
 
   return (
     <div
@@ -33,11 +34,12 @@ const TogglePanel: FC<Props> = ({ header, children, className }) => {
         { [styles.open]: isOpen },
         className?.wrapper
       )}
-      onClick={toggle}
-      ref={panelRef}
+      onClick={open}
     >
       <div className={cn(styles.header, className?.header)}>{header}</div>
-      <div className={styles.body}>{children}</div>
+      <div className={styles.body} ref={bodyRef}>
+        {children}
+      </div>
     </div>
   )
 }
